@@ -167,12 +167,21 @@ function updateServerStatus(data) {
     if(host) {
         var el = document.getElementsByClassName("server-online")[0];
         el.innerHTML = "Serveren er på";
+    } else {
+        var el = document.getElementsByClassName("server-online")[0];
+        el.innerHTML = "Serveren er av";
     }
 
-    var el = document.getElementsByClassName("players-online")[0];
-    var player = "Spiller";
-    if(online > 1 || online == 0) {
-        player = "Spillere";
-    } 
-    el.innerHTML = online + " " + player + " online";
+    if(online == null) {
+        var el = document.getElementsByClassName("players-online")[0];
+        el.innerHTML = "Kunne ikke laste inn"
+    } else {
+        
+        var el = document.getElementsByClassName("players-online")[0];
+        var player = "Spiller";
+        if(online > 1 || online == 0) {
+            player = "Spillere";
+        } 
+        el.innerHTML = online + " " + player + " online";
+    }
 }
