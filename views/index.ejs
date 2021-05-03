@@ -1,11 +1,47 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>FrikkHub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+</head>
+<body>
+    <div id="header">
+        <div class="right">
+            <button class="button fd-design outline">Logg inn</button>
+            <button class="button fd-design solid white">Registrer</button>
+        </div>
+    </div>
+    <div id="top">
+        <div class="content">
+            <div class="title">
+                <p>Velkommen til</p>
+                <p>Gamerland 5</p>
+            </div>
+
+            <div class="body">
+                <!--<p>Der morra di er mann</p>-->
+            </div>
+            <div class="button-wrapper">
+                <button class="button fd-design white rounded smooth-shadow" onclick="showContent();">Sjekk ut</button>
+            </div>
+        </div>
+    </div>
+    <div id="content">
+
+        <img class="header" src="grass.png">
+
+        <!--<div class="wrapper">
+            <div class="sign smooth-shadow">
+                <img src="sign.png">
+                <p>Ip-addresser</p>
+            </div>
+        </div>-->
+
+    </div>
+
+</body>
 </html>
