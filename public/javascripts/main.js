@@ -24,6 +24,25 @@ async function showLoginModal(element) {
     }
 }
 
+async function showRegisterModal(element) {
+    await sleep(10);
+    var modal = element.parentNode.querySelector(".register-box");
+    if(modal.show == undefined) {
+        modal.show = true;
+        modal.style.display = "block";
+        return;
+    }
+
+    if(modal.show) {
+        modal.style.display = "none";
+        modal.show = false;
+    } else {
+        modal.style.display = "block";
+        modal.show = true;
+    
+    }
+}
+
 function sleep(interval) {
     return new Promise(resolve=>{
         setTimeout(()=>{
@@ -94,7 +113,7 @@ window.onload = function() {
 }
 
 
-var hideArray = [".login-box"];
+var hideArray = [".login-box", ".register-box"];
 function enableClickListener() {
     document.addEventListener("click", function(e) {
         var target = e.target;
@@ -113,4 +132,9 @@ function enableClickListener() {
 
         }
     })
+}
+
+
+function signInClient(e) {
+    e.preventDefault();
 }

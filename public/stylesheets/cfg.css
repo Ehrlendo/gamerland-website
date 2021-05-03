@@ -94,7 +94,7 @@
   }
   
   .fd-text-input .fd-text-input__action {
-    background-color: var(--main-button-color);
+    background-color: #E7F0FE;
     z-index: 1;
     height: 2.5rem;
     padding-left: 1rem;
@@ -135,3 +135,64 @@
     letter-spacing: 0.05em;
     opacity: 0.5;
   }
+
+
+
+
+
+
+  
+
+.button.fd-design {
+  height: fit-content;
+  width: fit-content;
+  padding: 0.5rem 2rem;
+  border: none;
+  outline: none;
+  background-color: var(--color-one);
+  font-family: 'PT Sans', sans-serif;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 0.25rem;
+  transition: all 150ms ease-in-out;
+  color: white;
+}
+
+.button.fd-design.blue {
+  background-color: var(--color-two);
+}
+
+.button.fd-design:hover {
+  transform: translateY(-0.5rem);
+}
+
+.button.fd-design:active {
+  transform: translateY(0.1rem);
+}
+
+.button.outline {
+  border: 2px solid white;
+  border-radius: 0.25rem;
+  background-color: transparent;
+  color: white;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+.button.white {
+  background-color: white;
+  color: var(--color-two);
+}
+
+.button.rounded {
+  border-radius: 10rem;
+}
+
+.smooth-shadow {
+  box-shadow: 0 1px 1px rgba(0,0,0,0.12), 
+  0 2px 2px rgba(0,0,0,0.12), 
+  0 4px 4px rgba(0,0,0,0.12), 
+  0 8px 8px rgba(0,0,0,0.12),
+  0 16px 16px rgba(0,0,0,0.12);
+}

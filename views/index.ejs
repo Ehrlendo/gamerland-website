@@ -13,7 +13,7 @@
     <div id="header">
         <div class="right">
             <button class="button fd-design outline" onclick="showLoginModal(this)">Logg inn</button>
-            <button class="button fd-design solid white">Registrer</button>
+            <button class="button fd-design solid white" onclick="showRegisterModal(this)">Registrer</button>
 
             <div class="login-box smooth-shadow">
                 <form>
@@ -28,9 +28,41 @@
                         <span class="fd-text-input__title">Passord</span>
                     </label>
 
-                    <button class="fd-design button blue smooth-shadow">logg inn</button>
+                    <button class="fd-design button blue smooth-shadow" onclick="signInClient(event)">logg inn</button>
                 </form>
             </div>
+
+            <div class="register-box smooth-shadow">
+                <form>
+                    <label class="fd-text-input">
+                        <input type="text" class="fd-text-input__action" autocomplete="minecraft-username">
+                        <div class="fd-text-input__indicator"></div>
+                        <span class="fd-text-input__title">Minecraftbrukernavn</span>
+                    </label>
+
+                    <label class="fd-text-input">
+                        <input type="email" class="fd-text-input__action" autocomplete="email">
+                        <div class="fd-text-input__indicator"></div>
+                        <span class="fd-text-input__title">Email</span>
+                    </label>
+
+                    <label class="fd-text-input">
+                        <input type="password" class="fd-text-input__action" autocomplete="new-password">
+                        <div class="fd-text-input__indicator"></div>
+                        <span class="fd-text-input__title">passord</span>
+                    </label>
+
+                    <label class="fd-text-input">
+                        <input type="password" class="fd-text-input__action" autocomplete="none">
+                        <div class="fd-text-input__indicator"></div>
+                        <span class="fd-text-input__title">Gjenta passord</span>
+                    </label>
+
+                    <button class="fd-design button blue smooth-shadow" onclick="signInClient(event)">Registrer</button>
+                </form>
+            </div>
+
+
         </div>
     </div>
     <div id="top">
@@ -61,6 +93,14 @@
 
         <div id="under-construction">
             <p>Denne siden er under konstruksjon</p>
+        </div>
+
+
+
+        <div id="footer">
+            <div class="right">
+                <p>Utviklet av Erlend Solerød og Frikk Ormestad Larsen</p>
+            </div>
         </div>
     </div>
 

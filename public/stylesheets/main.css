@@ -1,7 +1,7 @@
 body, html {
     padding: 0;
     margin: 0;
-    height: 100%;
+    height: fit-content;
     width: 100%;
 }
 
@@ -118,11 +118,7 @@ body {
     z-index: 2;
 }
 
-#header .right .login-box {
-
-}
-
-#header .right .login-box {
+#header .right .login-box, .register-box {
     display: none;
     position: absolute;
     background-color: white;
@@ -163,6 +159,7 @@ body {
     transform: translateY(-100%);
 }
 
+
 #header .right .login-box label {
     display: block;
 }
@@ -174,6 +171,30 @@ body {
 #header .right .login-box label:nth-of-type(1) {
     margin-top: 1rem;
 }
+
+
+
+#header .right .register-box::after {
+    border: white solid;
+    height: 0;
+    width: 0;
+    position: absolute;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid white;
+    content:".";
+    color: transparent;
+    right: 4rem;
+    top: 0;
+    transform: translateY(-100%);
+}
+
+#header .right .register-box {
+    padding: 2rem 1rem 1rem 1rem;
+}
+
+
 
 #header .right {
     float: right;
@@ -271,58 +292,24 @@ body {
 }
 
 
-
-
-.button.fd-design {
-    height: fit-content;
-    width: fit-content;
-    padding: 0.5rem 2rem;
-    border: none;
-    outline: none;
-    background-color: var(--color-one);
-    font-family: 'PT Sans', sans-serif;
-    text-transform: uppercase;
-    cursor: pointer;
-    font-weight: bold;
-    border-radius: 0.25rem;
-    transition: all 150ms ease-in-out;
-    color: white;
+#footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2rem;
 }
 
-.button.fd-design.blue {
-    background-color: var(--color-two);
+#footer .right {
+    float: right;
+    align-items: center;
+    display: inline-flex;
+    height: 100%;
+    padding: 0 1rem 0 0;
+    opacity: 0.5;
 }
 
-.button.fd-design:hover {
-    transform: translateY(-0.5rem);
-}
-
-.button.fd-design:active {
-    transform: translateY(0.1rem);
-}
-
-.button.outline {
-    border: 2px solid white;
-    border-radius: 0.25rem;
-    background-color: transparent;
-    color: white;
-    z-index: 2;
-    box-sizing: border-box;
-}
-
-.button.white {
-    background-color: white;
-    color: var(--color-two);
-}
-
-.button.rounded {
-    border-radius: 10rem;
-}
-
-.smooth-shadow {
-    box-shadow: 0 1px 1px rgba(0,0,0,0.12), 
-    0 2px 2px rgba(0,0,0,0.12), 
-    0 4px 4px rgba(0,0,0,0.12), 
-    0 8px 8px rgba(0,0,0,0.12),
-    0 16px 16px rgba(0,0,0,0.12);
+#footer .right p {
+    margin: 0;
+    font-size: 0.6rem;
 }
