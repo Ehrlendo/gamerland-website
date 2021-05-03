@@ -37,7 +37,7 @@
                     <label class="fd-text-input">
                         <input type="text" class="fd-text-input__action" autocomplete="minecraft-username">
                         <div class="fd-text-input__indicator"></div>
-                        <span class="fd-text-input__title">Minecraftbrukernavn</span>
+                        <span class="fd-text-input__title">Minecraft-brukernavn</span>
                     </label>
 
                     <label class="fd-text-input">
@@ -53,7 +53,7 @@
                     </label>
 
                     <label class="fd-text-input">
-                        <input type="password" class="fd-text-input__action" autocomplete="none">
+                        <input type="password" class="fd-text-input__action" autocomplete="new-password">
                         <div class="fd-text-input__indicator"></div>
                         <span class="fd-text-input__title">Gjenta passord</span>
                     </label>
@@ -84,17 +84,34 @@
 
         <img class="header" src="/images/grass.png">
 
-        <!--<div class="wrapper">
-            <div class="sign smooth-shadow">
-                <img src="sign.png">
-                <p>Ip-addresser</p>
+        <div class="wrapper">
+            <div class="sign">
+                <img src="/images/sign.png" class="smooth-shadow">
+                <p>Serverstatus</p>
             </div>
-        </div>-->
+        
+            <div class="status">
+                <div class="sign">
+                    <img src="/images/sign.png" class="smooth-shadow">
+                    <p class="server-online">Laster...</p>
+                </div>
+                <div class="sign">
+                    <img src="/images/sign.png" class="smooth-shadow">
+                    <p class="players-online">0 Spillere online</p>
+                </div>
+            </div>
+            
+        </div>
 
+        <!--
         <div id="under-construction">
             <p>Denne siden er under konstruksjon</p>
         </div>
+    -->
 
+    <div id="user-list">
+
+    </div>
 
 
         <div id="footer">

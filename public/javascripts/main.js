@@ -110,6 +110,22 @@ window.onload = function() {
 
     enableClickListener();
 
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "/mc/server/status");
+    xhr.send();
+
+    xhr.onreadystatechange = function() {
+        if(this.status == 200 && this.readyState == 4) {
+            var res = JSON.parse(this.responseText);
+            updateServerStatus(res);
+
+
+
+        } else if(this.status != 200 && this.readyState == 4) {
+            console.log(this.responseText);
+        }
+    }
 }
 
 
@@ -141,4 +157,22 @@ function signInClient(e) {
 
 function registerUser(e) {
     e.preventDefault();
+}
+
+
+function updateServerStatus(data) {
+    console.log(data)
+    var online = data.onlinePlayers;
+    var host = data.host;
+    if(host) {
+        var el = document.getElementsByClassName("server-online")[0];
+        el.innerHTML = "Serveren er på";
+    }
+
+    var el = document.getElementsByClassName("players-online")[0];
+    var player = "Spiller";
+    if(online > 1 || online == 0) {
+        player = "Spillere";
+    } 
+    el.innerHTML = online + " " + player + " online";
 }
