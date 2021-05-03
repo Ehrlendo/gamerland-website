@@ -138,3 +138,7 @@ function enableClickListener() {
 function signInClient(e) {
     e.preventDefault();
 }
+
+function registerUser(e) {
+    e.preventDefault();
+}
