@@ -138,7 +138,7 @@ body {
 }
 
 #content {
-    background: url('dirt.png');
+    background: url('/images/dirt.png');
     background-position-y: -15px;
     background-position-x: -10px;
     background-size: 125%;
