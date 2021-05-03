@@ -118,6 +118,63 @@ body {
     z-index: 2;
 }
 
+#header .right .login-box {
+
+}
+
+#header .right .login-box {
+    display: none;
+    position: absolute;
+    background-color: white;
+    width: fit-content;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-top: 0.5rem;
+    right: 1rem;
+    animation: fade-in 150ms ease-in-out both;
+}
+
+@keyframes fade-in {
+    0%{opacity: 0}
+    100%{opacity:1}
+}
+
+#header .right .login-box form {
+    position: relative;
+}
+
+#header .right .login-box form button {
+    margin-top: 1rem;
+}
+
+#header .right .login-box::after {
+    border: white solid;
+    height: 0;
+    width: 0;
+    position: absolute;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid white;
+    content:".";
+    color: transparent;
+    left: 4rem;
+    top: 0;
+    transform: translateY(-100%);
+}
+
+#header .right .login-box label {
+    display: block;
+}
+
+#header .right .login-box label:nth-of-type(2) {
+    margin-top: 2rem;
+}
+
+#header .right .login-box label:nth-of-type(1) {
+    margin-top: 1rem;
+}
+
 #header .right {
     float: right;
     display: inline-block;
@@ -229,6 +286,11 @@ body {
     font-weight: bold;
     border-radius: 0.25rem;
     transition: all 150ms ease-in-out;
+    color: white;
+}
+
+.button.fd-design.blue {
+    background-color: var(--color-two);
 }
 
 .button.fd-design:hover {

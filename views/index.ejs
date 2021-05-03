@@ -6,13 +6,31 @@
     <title>Gamerland 5</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/cfg.css" />
     <script src="/javascripts/main.js"></script>
 </head>
 <body>
     <div id="header">
         <div class="right">
-            <button class="button fd-design outline">Logg inn</button>
+            <button class="button fd-design outline" onclick="showLoginModal(this)">Logg inn</button>
             <button class="button fd-design solid white">Registrer</button>
+
+            <div class="login-box smooth-shadow">
+                <form>
+                    <label class="fd-text-input">
+                        <input type="text" class="fd-text-input__action">
+                        <div class="fd-text-input__indicator"></div>
+                        <span class="fd-text-input__title">brukernavn</span>
+                    </label>
+                    <label class="fd-text-input">
+                        <input type="password" class="fd-text-input__action">
+                        <div class="fd-text-input__indicator"></div>
+                        <span class="fd-text-input__title">Passord</span>
+                    </label>
+
+                    <button class="fd-design button blue smooth-shadow">logg inn</button>
+                </form>
+            </div>
         </div>
     </div>
     <div id="top">
