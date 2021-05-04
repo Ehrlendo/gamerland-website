@@ -7,6 +7,28 @@ function showContent() {
 
 async function showLoginModal(element) {
     await sleep(10);
+    var showConditions = {showMobile: false}
+
+    //Get website size
+    var width = document.documentElement.clientWidth || window.innerWidth;
+    var height = document.documentElement.clientHeight || window.innerHeight;
+
+    if(width < 500) {
+        //Show mobile view instead
+        showConditions.showMobile = true;
+    } else {
+        showConditions.showMobile = false;
+    }
+
+    if(showConditions.showMobile) {
+        var modal = element.parentNode.querySelector(".login-box");
+        modal.classList.add("mobile");
+    } else {
+        var modal = element.parentNode.querySelector(".login-box");
+        modal.classList.remove("mobile");
+    }
+
+
     var modal = element.parentNode.querySelector(".login-box");
     if(modal.show == undefined) {
         modal.show = true;

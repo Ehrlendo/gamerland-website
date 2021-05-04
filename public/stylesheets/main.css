@@ -131,6 +131,37 @@ body {
     animation: fade-in 150ms ease-in-out both;
 }
 
+#header .right .login-box.mobile, .register-box.mobile {
+    position: fixed;
+    bottom: 0;
+    background-color: white;
+    width: 100%;
+    border-radius: 1rem 1rem 0 0;
+    left: 0;
+    margin: 0;
+    box-sizing: border-box;
+    height: 80%;
+    animation: slide-in-bottom 200ms ease-in-out;
+}
+
+#header .right .login-box.mobile::after, .register-box.mobile::after {
+    display: none;
+
+}
+
+#header .right {
+    float: right;
+    display: inline-block;
+    padding: 1rem;
+    right: 0;
+    position: absolute;
+}
+
+@keyframes slide-in-bottom {
+    0%{transform: translate(0,100%);}
+    100%{transform: translate(0,0);}
+}
+
 @keyframes fade-in {
     0%{opacity: 0}
     100%{opacity:1}
@@ -197,11 +228,6 @@ body {
 
 
 
-#header .right {
-    float: right;
-    display: inline-block;
-    padding: 1rem;
-}
 
 
 #content .header {
