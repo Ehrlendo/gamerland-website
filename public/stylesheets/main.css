@@ -3,6 +3,7 @@ body, html {
     margin: 0;
     height: fit-content;
     width: 100%;
+    overflow-x: hidden;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
@@ -50,7 +51,7 @@ body {
     text-transform: uppercase;
     position: relative;
     width: fit-content;
-    font-size: 0.8rem;
+    font-size: 1rem;
     margin-bottom: 1rem;
     font-weight: lighter;
     letter-spacing: 0.15em;
@@ -74,7 +75,7 @@ body {
     text-transform: uppercase;
     font-family: 'PT Sans', sans-serif;
     letter-spacing: 0.15em;
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: bold;
     margin: 0;
 }
