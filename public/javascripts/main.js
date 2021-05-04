@@ -161,6 +161,7 @@ function registerUser(e) {
 
 
 function updateServerStatus(data) {
+    return;
     console.log(data)
     var online = data.onlinePlayers;
     var host = data.host;

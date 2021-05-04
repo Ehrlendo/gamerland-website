@@ -203,32 +203,32 @@ body {
 }
 
 
-#content {
-    width: 100%;
-    height: fit-content;
-    padding-bottom: 5rem;
-}
-
 #content .header {
-    transform: translate(0, -50%);
     width: 100%;
     height: auto;
+    margin: 0;
+    vertical-align: bottom;
 }
 
 #content {
-    background: url('/images/dirt.png');
-    background-position-y: -15px;
-    background-position-x: -10px;
-    background-size: 125%;
+
     position: relative;
+    width: 100%;
+    height: fit-content;
+    margin-top: -15rem;
 }
 
 #content > .wrapper {
+    background: url('/images/dirt.png');
+    background-position-x: -10px;
+    background-position: top;
+    background-size: 125%;
+    margin: 0;
     height: fit-content;
     width: 100%;
     padding: 1rem;
     box-sizing: border-box;
-    margin-top: -10rem;
+    margin-top: -0.5rem;
 }
 
 
