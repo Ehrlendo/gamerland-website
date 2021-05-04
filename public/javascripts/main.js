@@ -20,9 +20,21 @@ async function showLoginModal(element) {
         showConditions.showMobile = false;
     }
 
+    var removeModal = function(event) {
+        var modal = event.target;
+        
+        modal.parentNode.removeChild(modal);
+    }
+
     if(showConditions.showMobile) {
         var modal = element.parentNode.querySelector(".login-box");
         modal.classList.add("mobile");
+
+        var shade = document.createElement("div");
+        shade.className = "fullpage-modal-shade";
+        document.body.appendChild(shade);
+        shade.addEventListener("click", removeModal);
+
     } else {
         var modal = element.parentNode.querySelector(".login-box");
         modal.classList.remove("mobile");
