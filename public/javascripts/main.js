@@ -4,11 +4,34 @@ function showContent() {
     window.scrollTo({top: h, behavior: 'smooth'});
 }
 
+function toggleHeader() {
+    var header = document.getElementById("header").querySelector(".right").getElementsByClassName("header-button");
+    var top = document.getElementById("header");
+
+    if(top.display == undefined) {
+        top.display = false;
+    }
+    console.log(top.display);
+
+    if(!top.display) {
+        var x;
+        for(x of header) {
+            x.style.display = "none";
+        }
+        top.display = true;
+    } else {
+        var x;
+        for(x of header) {
+            x.style.display = "inline-block";
+        }
+        top.display = false;
+    }
+}
 
 async function showLoginModal(element) {
     await sleep(10);
     var showConditions = {showMobile: false}
-
+    
     //Get website size
     var width = document.documentElement.clientWidth || window.innerWidth;
     var height = document.documentElement.clientHeight || window.innerHeight;
@@ -22,11 +45,19 @@ async function showLoginModal(element) {
 
     var removeModal = function(event) {
         var modal = event.target;
-        
+        toggleHeader();
         modal.parentNode.removeChild(modal);
+
+        //Hide the menu
+        var menu = document.getElementsByClassName("login-box")[0] || document.getElementsByClassName("register-box")[0];
+        if(menu) {
+            menu.style.display = "none";
+            menu.show = false;
+        }
     }
 
     if(showConditions.showMobile) {
+        toggleHeader();
         var modal = element.parentNode.querySelector(".login-box");
         modal.classList.add("mobile");
 
@@ -163,7 +194,7 @@ window.onload = function() {
 }
 
 
-var hideArray = [".login-box", ".register-box"];
+var hideArray = [".login-box:not(.mobile)", ".register-box"];
 function enableClickListener() {
     document.addEventListener("click", function(e) {
         var target = e.target;
