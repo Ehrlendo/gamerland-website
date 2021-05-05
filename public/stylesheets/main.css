@@ -295,7 +295,7 @@ body {
     position: relative;
     width: 100%;
     height: fit-content;
-    margin-top: -15rem;
+    transform: translate(0,-15vh);
 }
 
 #content > .wrapper {
