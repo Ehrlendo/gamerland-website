@@ -102,6 +102,8 @@
     font-size: 1.2rem;
     font-weight: lighter;
     border-radius: 0.25rem;
+    width: 100%;
+    box-sizing: border-box;
     border: none;
     outline: none;
     font-family: bahnschrift;
@@ -138,7 +140,31 @@
 
 
 
+.fd-text-input .fd-text-input__warning {
+  display: none;
+  background-color: var(--color-two);
+  font-size: 1rem;
+  line-height: 1rem;
+  width: 100%;
+  height: fit-content;
+  padding: 1rem;
+  box-sizing: border-box;
+  border-radius: 0 0 0.5rem 0.5rem;
+  position: absolute;
+  z-index: 10;
+  margin: 0;
+  text-align: center;
+  animation: fd-input-slide-down-warning 200ms ease-in-out;
+}
 
+@keyframes fd-input-slide-down-warning {
+  0% {transform: translate(0,-2rem); opacity: 0;}
+  100% {transform: translate(0,0); opacity: 1;}
+}
+
+.fd-text-input .fd-text-input__action:focus ~ .fd-text-input__warning {
+  display: block;
+}
 
 
   
@@ -195,4 +221,14 @@
   0 4px 4px rgba(0,0,0,0.12), 
   0 8px 8px rgba(0,0,0,0.12),
   0 16px 16px rgba(0,0,0,0.12);
+}
+
+
+
+:root {
+  --color-one: #8d8741;
+  --color-two: #659DBD;
+  --color-three: #DAAD86;
+  --color-four: #BC986A;
+  --color-five: #FBEEC1;
 }

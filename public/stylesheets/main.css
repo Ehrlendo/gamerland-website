@@ -18,13 +18,6 @@ body {
     font-family: 'PT Sans', sans-serif;
 }
 
-:root {
-    --color-one: #8d8741;
-    --color-two: #659DBD;
-    --color-three: #DAAD86;
-    --color-four: #BC986A;
-    --color-five: #FBEEC1;
-}
 
 
 #top {
@@ -120,7 +113,7 @@ body {
     z-index: 2;
 }
 
-#header .right .login-box, .register-box {
+#header .right .login-box {
     display: none;
     position: absolute;
     background-color: white;
@@ -132,6 +125,140 @@ body {
     animation: fade-in 150ms ease-in-out both;
 }
 
+
+
+
+
+
+/*Register box styling for desktop PC*/
+
+#header .right .register-box:not(.mobile) .scroll-container {
+    height: fit-content;
+    max-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+}
+
+#header .right .register-box:not(.mobile) .scroll-container {
+    padding: 2rem 1rem 2rem 1rem;
+}
+
+#header .right .register-box:not(.mobile) {
+    display: none;
+    position: fixed;
+    box-sizing: border-box;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 40%;
+    min-width: 500px;
+    max-width: 30rem;
+    background-color: white;
+    animation: slide-in-sidebar 200ms ease-in-out both;
+    overflow-y: hidden;
+}
+
+#header .right .register-box:not(.mobile) form label:not(:first-of-type) {
+    margin-top: 2rem;
+}
+
+#header .right .register-box:not(.mobile) form label {
+    margin-left: 50%;
+    transform: translate(-50%);
+    width: 70%;
+}
+
+#header .right .register-box:not(.mobile) form button {
+    margin-top: 1rem;
+    width: 70%;
+    margin-left: 50%;
+    transform: translate(-50%);
+    margin-bottom: 2rem;
+}
+
+#header .right .register-box:not(.mobile) form {
+    position: relative;
+    margin: auto;
+    width: fit-content;
+}
+
+#header .right .register-box .close-button {
+    display: none;
+}
+
+#header .right .register-box:not(.mobile) .close-button {
+    display: block;
+    position: absolute;
+    top: 0.5rem;
+    left: 0;
+    transform: translate(calc(-100% - 1rem));
+    border: none;
+    outline: none;
+    color: white;
+    font-family: 'PT-sans', sans-serif;
+    border-radius: 2rem;
+    background: transparent;
+    font-size: 2rem;
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+}
+
+#header .right .register-box:not(.mobile) .close-button:hover {
+    transform: translate(calc(-100% - 1.5rem));
+}
+
+/*END*/
+
+/*Common register box styling*/
+
+#header .right .register-box .scroll-container > p {
+    color: var(--color-two);
+    text-transform: uppercase;
+    font-size: 1.8rem;
+    font-family: 'PT-sans', sans-serif;
+    width: 100%;
+    text-align: center;
+}
+
+#header .right .register-box form label {
+    margin: auto;
+}
+
+@keyframes slide-in-sidebar {
+    0%{transform:translate(100%,0)}
+    100%{transform:translate(0,0)}
+}
+/*END*/
+
+
+
+
+
+/*Register box styling for mobile*/
+
+#header .right .register-box.mobile form label:not(:first-of-type) {
+    margin-top: 2rem;
+}
+
+#header .right .register-box.mobile form {
+    width: 80%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+#header .right .register-box.mobile form label {
+    width: 100%;
+}
+/*END*/
+
+
+
+/*Common mobile styling for register and login box*/
 #header .right .login-box.mobile, .register-box.mobile {
     position: fixed;
     bottom: 0;
@@ -155,15 +282,13 @@ body {
     top: 0;
     left: 0;
 }
+/*END*/
 
-
-#header .right .login-box.mobile::after, .register-box.mobile::after {
+/*Login box styling for mobile*/
+#header .right .login-box.mobile::after {
     display: none;
 }
 
-#header .right .login-box > p {
-    display: none;
-}
 
 #header .right .login-box.mobile > p {
     display: block;
@@ -177,6 +302,7 @@ body {
     text-align: center;
     position: relative;
 }
+
 
 #header .right .login-box.mobile label {
     margin: auto;
@@ -193,31 +319,16 @@ body {
 }
 
 #header .right .login-box.mobile form {
-    position:initial;
+    position: initial;
     min-height: 30rem;
     scroll: auto;
     width: 100%;
     height: 100%;
 }
+/*END*/
 
 
-#header .right {
-    float: right;
-    display: inline-block;
-    padding: 1rem;
-    right: 0;
-    position: absolute;
-}
-
-@keyframes slide-in-bottom {
-    0%{transform: translate(0,100%);}
-    100%{transform: translate(0,0);}
-}
-
-@keyframes fade-in {
-    0%{opacity: 0}
-    100%{opacity:1}
-}
+/*Common login box styling*/
 
 #header .right .login-box form {
     position: relative;
@@ -243,6 +354,9 @@ body {
     transform: translateY(-100%);
 }
 
+#header .right .login-box > p {
+    display: none;
+}
 
 #header .right .login-box label {
     display: block;
@@ -256,27 +370,32 @@ body {
     margin-top: 1rem;
 }
 
+/*END*/
 
 
-#header .right .register-box::after {
-    border: white solid;
-    height: 0;
-    width: 0;
-    position: absolute;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid white;
-    content:".";
-    color: transparent;
-    right: 4rem;
-    top: 0;
-    transform: translateY(-100%);
+
+
+
+#header .right {
+    float: right;
+    display: inline-block;
+    padding: 1rem;
+    right: 0;
+    position: static;
 }
 
-#header .right .register-box {
-    padding: 2rem 1rem 1rem 1rem;
+@keyframes slide-in-bottom {
+    0%{transform: translate(0,100%);}
+    100%{transform: translate(0,0);}
 }
+
+@keyframes fade-in {
+    0%{opacity: 0}
+    100%{opacity:1}
+}
+
+
+
 
 
 #header .right button {
@@ -412,3 +531,4 @@ body {
     margin: 0;
     font-size: 0.6rem;
 }
+

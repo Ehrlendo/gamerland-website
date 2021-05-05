@@ -34,33 +34,39 @@
             </div>
 
             <div class="register-box smooth-shadow">
-                <form>
-                    <label class="fd-text-input">
-                        <input type="text" class="fd-text-input__action" autocomplete="minecraft-username">
-                        <div class="fd-text-input__indicator"></div>
-                        <span class="fd-text-input__title">Minecraft-brukernavn</span>
-                    </label>
+                <div class="scroll-container">
 
-                    <label class="fd-text-input">
-                        <input type="email" class="fd-text-input__action" autocomplete="email">
-                        <div class="fd-text-input__indicator"></div>
-                        <span class="fd-text-input__title">Email</span>
-                    </label>
-
-                    <label class="fd-text-input">
-                        <input type="password" class="fd-text-input__action" autocomplete="new-password">
-                        <div class="fd-text-input__indicator"></div>
-                        <span class="fd-text-input__title">passord</span>
-                    </label>
-
-                    <label class="fd-text-input">
-                        <input type="password" class="fd-text-input__action" autocomplete="new-password">
-                        <div class="fd-text-input__indicator"></div>
-                        <span class="fd-text-input__title">Gjenta passord</span>
-                    </label>
-
-                    <button class="fd-design button blue smooth-shadow" onclick="registerUser(event)">Registrer</button>
-                </form>
+                    <p>Registrer en bruker</p>
+                    <form>
+                        <label class="fd-text-input">
+                            <input type="text" class="fd-text-input__action" autocomplete="minecraft-username">
+                            <div class="fd-text-input__indicator"></div>
+                            <span class="fd-text-input__title">Minecraft-brukernavn</span>
+                            <p class="fd-text-input__warning smooth-shadow">Det er viktig at minecraft-brukernavnet er helt identisk med brukernavnet ditt in-game</p>
+                        </label>
+                        
+                        <label class="fd-text-input">
+                            <input type="email" class="fd-text-input__action" autocomplete="email">
+                            <div class="fd-text-input__indicator"></div>
+                            <span class="fd-text-input__title">Email</span>
+                        </label>
+                        
+                        <label class="fd-text-input">
+                            <input type="password" class="fd-text-input__action" autocomplete="new-password">
+                            <div class="fd-text-input__indicator"></div>
+                            <span class="fd-text-input__title">passord</span>
+                        </label>
+                        
+                        <label class="fd-text-input">
+                            <input type="password" class="fd-text-input__action" autocomplete="new-password">
+                            <div class="fd-text-input__indicator"></div>
+                            <span class="fd-text-input__title">Gjenta passord</span>
+                        </label>
+                        
+                        <button class="fd-design button blue smooth-shadow" onclick="registerUser(event)">Registrer bruker</button>
+                    </form>
+                </div>
+                <button class="close-button" onclick="closeRegisterBox(this)">&#10006;</button>
             </div>
 
 

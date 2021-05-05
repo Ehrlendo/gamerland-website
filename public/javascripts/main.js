@@ -1,3 +1,5 @@
+const minWidthToTriggerMobile = 600;
+
 function showContent() {
     //Get the screen height
     var h = document.documentElement.clientHeight;
@@ -35,8 +37,8 @@ async function showLoginModal(element) {
     //Get website size
     var width = document.documentElement.clientWidth || window.innerWidth;
     var height = document.documentElement.clientHeight || window.innerHeight;
-
-    if(width < 500) {
+    
+    if(width < minWidthToTriggerMobile) {
         //Show mobile view instead
         showConditions.showMobile = true;
     } else {
@@ -91,6 +93,48 @@ async function showLoginModal(element) {
 
 async function showRegisterModal(element) {
     await sleep(10);
+    var showConditions = {showMobile: false}
+    
+    //Get website size
+    var width = document.documentElement.clientWidth || window.innerWidth;
+    var height = document.documentElement.clientHeight || window.innerHeight;
+
+    if(width < minWidthToTriggerMobile) {
+        //Show mobile view instead
+        showConditions.showMobile = true;
+    } else {
+        showConditions.showMobile = false;
+    }
+
+    var removeModal = function(event) {
+        var modal = event.target;
+        toggleHeader();
+        modal.parentNode.removeChild(modal);
+
+        //Hide the menu
+    var menu = document.getElementsByClassName("login-box")[0] || document.getElementsByClassName("register-box")[0];
+        if(menu) {
+            menu.style.display = "none";
+            menu.show = false;
+        }
+    }
+
+    if(showConditions.showMobile) {
+        toggleHeader();
+        var modal = element.parentNode.querySelector(".register-box");
+        modal.classList.add("mobile");
+        
+        var shade = document.createElement("div");
+        shade.className = "fullpage-modal-shade";
+        document.body.appendChild(shade);
+        shade.addEventListener("click", removeModal);
+
+    } else {
+        var modal = element.parentNode.querySelector(".register-box");
+        modal.classList.remove("mobile");
+    }
+
+
     var modal = element.parentNode.querySelector(".register-box");
     if(modal.show == undefined) {
         modal.show = true;
@@ -250,4 +294,10 @@ function updateServerStatus(data) {
         } 
         el.innerHTML = online + " " + player + " online";
     }
+}
+
+function closeRegisterBox(el) {
+    var sB = el.closest(".register-box");
+    sB.style.display = "none";
+    sB.show = false;
 }
