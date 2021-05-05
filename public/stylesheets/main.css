@@ -70,13 +70,14 @@ body {
 }
 
 #top .title p:not(:first-of-type) {
-    width: fit-content;
     color: white;
     text-transform: uppercase;
     font-family: 'PT Sans', sans-serif;
     letter-spacing: 0.15em;
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: bold;
+    text-align: center;
+    width: 100%;
     margin: 0;
 }
 
