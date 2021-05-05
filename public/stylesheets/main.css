@@ -157,7 +157,6 @@ body {
     max-width: 30rem;
     background-color: white;
     animation: slide-in-sidebar 200ms ease-in-out both;
-    overflow-y: hidden;
 }
 
 #header .right .register-box:not(.mobile) form label:not(:first-of-type) {
@@ -415,7 +414,7 @@ body {
     position: relative;
     width: 100%;
     height: fit-content;
-    margin-top: -15vh;
+    margin-top: -20vh;
 }
 
 #content > .wrapper {
