@@ -58,7 +58,7 @@ pre {
     color: transparent;
 }
 
-#devLog:hover ~ .error-stack {
+#wrapper:hover .error-stack {
     display: block;
     text-align: left;
     

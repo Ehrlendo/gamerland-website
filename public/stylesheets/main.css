@@ -3,6 +3,7 @@ body, html {
     margin: 0;
     height: fit-content;
     width: 100%;
+    background-color: var(--color-two);
     overflow-x: hidden;
 }
 
@@ -410,7 +411,6 @@ body {
 }
 
 #content {
-
     position: relative;
     width: 100%;
     height: fit-content;
