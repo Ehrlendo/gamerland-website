@@ -8,8 +8,24 @@
     <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/main.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/cfg.css" />
     <script src="/javascripts/main.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+    rel="stylesheet">
 </head>
 <body>
+
+    <!--Kodet av Frikk Balder Ormestad Larsen 2021-->
+    <!--
+        
+        Alle tekstbokser og animasjoner
+        er designet av Frikk, med det hjemmelagede
+        fd-design biblioteket. Dette er en kombinasjon av
+        CSS-stiler og JS-kode, som utgjør en stor del
+        av interaktiviteten på denne nettsiden.
+        
+        Kodet for Erlend Solerød.
+
+    -->
+
     <div id="header">
         <div class="right">
             <button class="button header-button fd-design outline" onclick="showLoginModal(this)">Logg inn</button>
@@ -64,6 +80,10 @@
                         </label>
                         
                         <button class="fd-design button blue smooth-shadow" onclick="registerUser(event)">Registrer bruker</button>
+                        
+                        <div class="info">
+                            <i class="material-icons-outlined">info</i><span>Denne funksjonen er under arbeid</span>
+                        </div>
                     </form>
                 </div>
                 <button class="close-button" onclick="closeRegisterBox(this)">&#10006;</button>
@@ -89,8 +109,11 @@
     </div>
     <div id="content">
 
-        <img class="header" src="/images/minecraftting8.png">
 
+
+        <div id="webpage-content">
+            
+        </div>
         <div class="wrapper">
             <!--
             <div class="sign">
@@ -109,6 +132,7 @@
                 </div>
             </div>
         -->
+
         </div>
 
         <!--

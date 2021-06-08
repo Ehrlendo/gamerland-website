@@ -151,7 +151,7 @@
   box-sizing: border-box;
   border-radius: 0 0 0.5rem 0.5rem;
   position: absolute;
-  z-index: 10;
+  z-index: 100;
   margin: 0;
   text-align: center;
   animation: fd-input-slide-down-warning 200ms ease-in-out;

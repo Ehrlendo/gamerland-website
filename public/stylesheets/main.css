@@ -127,8 +127,45 @@ body {
 }
 
 
+#header > div > div.login-box.mobile.smooth-shadow form button:hover {
+    transform: translate(-50%, -0.5rem);
+}
+
+#header > div > div.login-box:not(.mobile).smooth-shadow form button:hover {
+    transform: translate(0,-0.5rem);
+}
+
+#header > div > div.register-box.smooth-shadow form button:hover {
+    transform: translate(-50%, -0.5rem);
+}
 
 
+/* DETTE ER MIDLERTIDIG STYLING */
+
+#header > div > div.register-box.smooth-shadow form .info i, span {
+    color: black;
+    line-height: 1rem;  
+    vertical-align: top;
+}
+
+#header > div > div.register-box.smooth-shadow form .info span {
+    margin-left: 0.5rem;
+}
+
+#header > div > div.register-box.smooth-shadow form .info {
+    margin: auto;
+    width: fit-content;
+    margin-top: 1rem;
+}
+
+
+
+/*END*/
+
+/*Login box styling for desktop PC*/
+#header > div > div.login-box:not(.mobile).smooth-shadow form button {
+    margin-top: 1rem;
+}
 
 
 /*Register box styling for desktop PC*/
@@ -144,6 +181,7 @@ body {
 
 #header .right .register-box:not(.mobile) .scroll-container {
     padding: 2rem 1rem 2rem 1rem;
+    box-sizing: border-box;
 }
 
 #header .right .register-box:not(.mobile) {
@@ -167,7 +205,13 @@ body {
 #header .right .register-box:not(.mobile) form label {
     margin-left: 50%;
     transform: translate(-50%);
+    position: relative;
     width: 70%;
+}
+
+
+#header .right .register-box:not(.mobile) form label:first-of-type {
+    z-index: 1000;
 }
 
 #header .right .register-box:not(.mobile) form button {
@@ -221,6 +265,8 @@ body {
     font-size: 1.8rem;
     font-family: 'PT-sans', sans-serif;
     width: 100%;
+    height: 2rem;
+    margin: 2rem 0;
     text-align: center;
 }
 
@@ -247,6 +293,7 @@ body {
 #header .right .register-box.mobile form {
     width: 80%;
     position: absolute;
+    height: calc(100% - 6rem);
     left: 50%;
     transform: translate(-50%);
 }
@@ -254,6 +301,17 @@ body {
 #header .right .register-box.mobile form label {
     width: 100%;
 }
+
+#header > div > div.register-box.smooth-shadow.mobile > div > form > button {
+    width: 100%;
+    height: 3rem;
+    position: absolute;
+    bottom: 1rem;
+    left: 0;
+    z-index: 1001;
+}
+
+
 /*END*/
 
 
@@ -292,7 +350,8 @@ body {
 
 #header .right .login-box.mobile > p {
     display: block;
-    margin: auto;
+    margin: 2rem 0;
+    height: 2rem;
     color: var(--color-two);
     margin-bottom: 2rem;
     font-family: 'PT sans', sans-serif;
@@ -306,6 +365,7 @@ body {
 
 #header .right .login-box.mobile label {
     margin: auto;
+    width: 100%;
 }
 
 
@@ -314,16 +374,19 @@ body {
     bottom: 1rem;
     left: 50%;
     transform: translate(-50%);
-    width: 80%;
+    width: 100%;
     height: 3rem;
+    z-index: 1001;
 }
 
 #header .right .login-box.mobile form {
-    position: initial;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
     min-height: 30rem;
     scroll: auto;
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: calc(100% - 6rem);
 }
 /*END*/
 
@@ -334,9 +397,6 @@ body {
     position: relative;
 }
 
-#header .right .login-box form button {
-    margin-top: 1rem;
-}
 
 #header .right .login-box::after {
     border: white solid;
@@ -414,12 +474,16 @@ body {
     position: relative;
     width: 100%;
     height: fit-content;
+    min-height: 100vh;
     margin-top: -20vh;
+    overflow: auto;
+    background-image: url("/images/minecraftting8.png");
 }
 
 #content > .wrapper {
     background: url('/images/dirt.png');
-    position: relative;
+    position: absolute;
+    bottom: 0;
     background-position-x: -10px;
     background-position: top;
     background-size: 125%;
@@ -430,6 +494,18 @@ body {
     box-sizing: border-box;
     margin-top: -0.5rem;
     z-index: 3;
+}
+
+
+#webpage-content {
+    min-height: 100%;
+    width: 90%;
+    height: 100vh;
+    background: rgb(255,255,255,0.8);
+    min-height: 2rem;
+    margin: auto;
+    margin-top: 25vh;
+    border-radius:1rem;
 }
 
 
@@ -530,4 +606,3 @@ body {
     margin: 0;
     font-size: 0.6rem;
 }
-
