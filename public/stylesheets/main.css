@@ -311,6 +311,10 @@ body {
     z-index: 1001;
 }
 
+#header > div > div.register-box.smooth-shadow.mobile > div > form > button:hover {
+    transform: translate(0,-0.5rem);
+}
+
 
 /*END*/
 
