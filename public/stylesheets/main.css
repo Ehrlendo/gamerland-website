@@ -505,7 +505,7 @@ body {
     min-height: 100%;
     width: 90%;
     height: 100vh;
-    background: rgb(255,255,255,0.8);
+    background: transparent;
     min-height: 2rem;
     margin: auto;
     margin-top: 25vh;
@@ -609,4 +609,54 @@ body {
 #footer .right p {
     margin: 0;
     font-size: 0.6rem;
+}
+
+#webpage-content #guides {
+    height: fit-content;
+    width: 70%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    row-gap: 1rem;
+    column-gap: 1rem;
+}
+
+#webpage-content #guides .guide-button {
+    background-color: var(--color-two);
+    height: 10rem;
+    width: 100%;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    display: flex;
+    align-items: top;
+    transition: all 150ms ease-in-out;
+}
+
+#webpage-content #guides .guide-button:hover {
+    transform: translateY(-0.5rem);
+}
+
+#webpage-content #guides .guide-button:active {
+    transform: translateY(0.2rem);
+}
+
+
+#webpage-content #guides .guide-button img {
+    height: 100%;
+    width: auto;
+    border-radius: 0.8rem;
+}
+
+#webpage-content #guides .guide-button span {
+    font-size: 3rem;
+    vertical-align: top;
+    display: inline-block;
+    height: 3rem;
+    padding: 1rem;
+    line-height: 3rem;
+    width: fit-content;
+    color: var(--color-five);
+    font-family: 'PT Sans', sans-serif;
+    
 }

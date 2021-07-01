@@ -163,49 +163,6 @@ function sleep(interval) {
 
 
 
-var FDButtons = function(){
-    this.activateInput = (inp) => {
-        //Get the input tag
-        var el = inp.querySelector(".fd-text-input__action");
-        if(!el) {return new Error("Could not find element")}
-
-        el.addEventListener("blur", (e)=>{
-            if(e.target.value.trim().length > 0) {
-                //Don't let the label fall back down
-                el.closest(".fd-text-input").querySelector(".fd-text-input__title").style = `transform: translate(-0.8rem,-1.6rem); font-size: 1rem; line-height: 1.5rem; height: 1.5rem; opacity: 1;`; 
-                return;
-            }
-            console.log("iasind")
-            el.closest(".fd-text-input").querySelector(".fd-text-input__title").style = ``;
-        })
-
-    },
-    this.textInput = (title)=> {
-        var lab = document.createElement("label");
-        lab.className = "fd-text-input";
-    
-        var inp = document.createElement("input");
-        inp.type = "text";
-        inp.className = "fd-text-input__action smooth-shadow";
-    
-        var sp = document.createElement("span");
-        sp.className = "fd-text-input__title";
-
-        if(title) {
-            sp.innerHTML = title + '';
-        }
-
-        var indicator = document.createElement("div");
-        indicator.className = "fd-text-input__indicator";
-
-        lab.appendChild(inp);
-        lab.appendChild(indicator);
-        lab.appendChild(sp);
-
-        return lab;
-    }
-}
-
 
 window.onload = function() {
     const FDButts = new FDButtons();
