@@ -619,7 +619,7 @@ body {
 
 #webpage-content #guides {
     height: fit-content;
-    width: 80%;
+    width: 100%;
     display: grid;
     margin: auto;
     grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
