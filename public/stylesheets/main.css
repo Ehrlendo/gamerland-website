@@ -3,6 +3,8 @@ body, html {
     margin: 0;
     height: fit-content;
     min-height: 100vh;
+    max-height: 100vh;
+    overflow-y: hidden;
     width: 100%;
     background-color: var(--color-two);
     overflow-x: hidden;
@@ -200,7 +202,7 @@ body {
 }
 
 #header .right .register-box:not(.mobile) form label:not(:first-of-type) {
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 #header .right .register-box:not(.mobile) form label {
@@ -288,7 +290,7 @@ body {
 /*Register box styling for mobile*/
 
 #header .right .register-box.mobile form label:not(:first-of-type) {
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 #header .right .register-box.mobile form {
@@ -434,7 +436,7 @@ body {
 }
 
 #header .right .login-box label:nth-of-type(2) {
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 #header .right .login-box label:nth-of-type(1) {
@@ -486,207 +488,112 @@ body {
     width: 100%;
     height: fit-content;
     min-height: 100vh;
-    margin-top: -20vh;
+    margin-top: -40vh;
     overflow: auto;
     background-image: url("/images/minecraftting8.png");
 }
 
-#content > .wrapper {
-    background: url('/images/dirt.png');
-    position: absolute;
-    bottom: 0;
-    background-position-x: -10px;
-    background-position: top;
-    background-size: 125%;
-    margin: 0;
-    height: fit-content;
-    min-height: 2rem;
-    width: 100%;
-    box-sizing: border-box;
-    margin-top: -0.5rem;
-    z-index: 3;
-}
-
-
-#webpage-content {
-    height: fit-content;
-    width: 90%;
-    background: transparent;
-    min-height: 2rem;
-    overflow-y: hidden;
-    margin: auto;
-    margin-top: 25vh;
-    border-radius:1rem;
-    margin-bottom: 1rem;
-}
-
-
-#content > .wrapper .sign {
-    position: relative;
-    width: 25rem;
-    height: calc(25rem/(16/9));
-    text-align: center;
-    margin: auto;
-    margin-top: 1rem;
-    display: grid;
-    align-items: center;
-    text-align: center;
-}
-
-#content > .wrapper .sign p {
-    margin: 0;
-    font-size: 2rem;
-    font-weight: lighter;
-    white-space: initial;
-    overflow: hidden;
-    max-height: 10rem;
-    font-family: Minecraftia;
-    color: black;
-    z-index: 1;
-    width: 100%;
-    text-align: center;
-}
-
-#content > .wrapper img {
-    width: 25rem;
-    display: block;
-    border-radius: 0.25rem;
-    position: absolute;
-}
-
-#content > .wrapper .status {
-    height: 10rem;
-    width: 100%;
-}
-
-#content > .wrapper .status .sign {
-    display: inline-grid;
-    vertical-align: top;
-}
-
-
-#under-construction {
-    width: 100%;
-    position: absolute;
-    height: 5rem;
-    background: repeating-linear-gradient(
-    45deg,
-    black,
-    black 10px,
-    #ffcc00 10px,
-    #ffcc00 20px
-    );
-
-    top: 50%;
-    transform: translate(0,-50%);
-    display: grid;
-    align-items: center;
-    text-align: center;
-}
-
-#under-construction p {
-    color: black;
-    font-weight: bold;
-    font-size: 1.6rem;
-    margin: 0;
-    background-color: #ffcc00;
-    padding: 0.5rem 0;
-    text-transform: uppercase;
-}
-
-
-#footer {
+#white-box {
     position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2rem;
-    z-index: 4;
+    bottom: calc(-80% + 3rem);
+    height: 80%;
+    background-color: white;
+    width: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 1rem 1rem 0 0;
+    transition: all 250ms ease-in-out;
+    min-width: 11rem;
 }
 
-#footer .right {
-    float: right;
-    align-items: center;
-    display: inline-flex;
-    height: 100%;
-    padding: 0 1rem 0 0;
-    opacity: 0.5;
-    align-items: center;
+#white-box > *:not(.arrow-indicator) {
+    opacity: 0;
+    transition: opacity 150ms ease-in-out;
 }
 
-#footer .right p {
-    margin: 0;
-    font-size: 0.6rem;
-}
-
-#webpage-content #guides {
-    height: fit-content;
-    width: 100%;
-    display: grid;
-    margin: auto;
-    grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
-    row-gap: 1rem;
-    column-gap: 1rem;
-}
-
-#webpage-content #guides .guide-button {
-    background-color: var(--color-two);
-    height: 10rem;
-    width:100%;
-    margin: auto;
-    border-radius: 0.8rem;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: top;
-    transition: all 150ms ease-in-out;
-    overflow: hidden;
-}
-
-#webpage-content #guides .guide-button:hover {
-    transform: translateY(-0.5rem);
-}
-
-#webpage-content #guides .guide-button:active {
-    transform: translateY(0.2rem);
-}
-
-
-#webpage-content #guides .guide-button img {
-    height: 100%;
-    width: auto;
-    border-radius: 0.8rem;
-}
-
-#webpage-content #guides .guide-button span {
-    font-size: 2.5rem;
-    vertical-align: top;
-    display: inline-block;
+#white-box > .arrow-indicator {
     height: 3rem;
-    padding: 1rem;
-    line-height: 2.5rem;
-    width: fit-content;
-    color: var(--color-five);
-    font-family: 'PT Sans', sans-serif;
-    
-}
-
-#webpage-content .information-box {
-    height: fit-content;
-    width: 100%;
-    background-color: rgba(255,255,255,0.8);
-    border-radius: 1rem;
-    margin-top: 1rem;
-    padding: 1rem;
-    box-sizing: border-box;
-}
-
-#webpage-content .information-box section:empty::before {
-    content:"Denne delen er tom for informasjon akkurat nå, d-uh! Kanskje det er noe her om en liten stund?";
+    width: 3rem;
+    border-radius: 3rem;
+    background-color: white;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,-50%);
     color: black;
+    text-align: center;
+    border: 2px solid #a9bcc6;
+    transition: all 150ms ease-in-out;
 }
 
-#webpage-content .information-box > h1 {
-    color: var(--color-four);
-    font-weight: lighter;
-    margin: 0.5rem 0 0.5rem;
+#white-box > .arrow-indicator i {
+    line-height: 3rem;
+    font-size: 2.5rem;
+    transition: all 250ms ease-in-out 0.2s;
+    color: #a9bcc6;
+}
+
+#white-box:hover > *:not(.arrow-indicator) {
+    opacity: 1;
+}
+#white-box:hover > .arrow-indicator {
+    border: 3px solid var(--color-two);
+    content: "ned";
+    box-shadow: none !important;
+}
+
+#white-box:hover > .arrow-indicator i {
+    transform: rotate(180deg);
+    color: var(--color-two);
+}
+#white-box:hover {
+    bottom: 0;
+}
+
+#white-box > .wrapper {
+    height: 100%;
+    width: 100%;
+    padding: 2.5rem 1rem 1rem 1rem;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+#white-box > .wrapper > .action-buttons-wrapper {
+    margin: auto;
+    max-width: calc((9rem + 1rem) * 4);
+    min-width: 9rem;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); 
+    row-gap: 1rem;  
+    column-gap: 1rem;
+    perspective: 50rem;
+}
+
+#white-box > .wrapper > .action-buttons-wrapper > .action-button {
+    height: fit-content;
+    width: 9rem;
+    background-color: #a9bcc6;
+    border-radius: 1rem;
+    cursor: pointer;
+    overflow: hidden;
+    margin: auto;
+    transition: transform 150ms ease-in-out;
+}
+
+#white-box > .wrapper > .action-buttons-wrapper > .action-button img {
+    height: 9rem;
+    border-radius: 1rem;
+    -webkit-user-drag: none;
+}
+
+#white-box > .wrapper > .action-buttons-wrapper > .action-button p {
+    width: 100%;
+    text-align: center;
+    margin: 0.3rem 0 0.5rem;
+    font-size: 1.3rem;
+    color: white;
+}
+
+#white-box > .wrapper > .action-buttons-wrapper > .action-button:hover {
+    transform: rotateX(15deg);
 }

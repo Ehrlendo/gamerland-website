@@ -11,6 +11,8 @@
     <script src="/javascripts/fd-inputs.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
     rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 </head>
 <body>
 
@@ -105,45 +107,20 @@
                 <!--<p>Der morra di er mann</p>-->
             </div>
             <div class="button-wrapper">
-                <button class="button fd-design white rounded smooth-shadow" onclick="showContent();">Sjekk ut</button>
+                <button class="button fd-design white rounded smooth-shadow" onclick="showContent();" disabled>Sjekk ut</button>
             </div>
         </div>
     </div>
-    <div id="content">
-
-
-
-        <div id="webpage-content">
-            <div id="guides">
-                <div class="guide-button smooth-shadow"><img src="./images/curseforge.png"><span>Curse Forge</span></div>
-                <div class="guide-button smooth-shadow"><img src="./images/mods.png"><span>Mods</span></div>
-                <div class="guide-button smooth-shadow"><img src="./images/vc.png"><span>Voice chat</span></div>
-                <div class="guide-button smooth-shadow"><img src="./images/map.png"><span>Map</span></div>
-
-            </div>
-
-            <div class="information-box">
-                <h1>Diverse informasjon</h1>
-                <section></section>
-            </div>
-
-            <div class="information-box">
-                <h1>Serverinformasjon</h1>
-                <section></section>
-            </div>
-        </div>
-
-        <!--
-        <div id="under-construction">
-            <p>Denne siden er under konstruksjon</p>
-        </div>
-    -->
-
-
-
-        <div id="footer">
-            <div class="right">
-                <p>Utviklet av Erlend Solerød og Frikk Ormestad Larsen</p>
+    <div id="content"></div>
+    
+    <div id="white-box" class="smooth-shadow">
+        <div class="arrow-indicator smooth-shadow"><i class="material-icons">expand_less</i></div>
+        <div class="wrapper">
+            <div class="action-buttons-wrapper">
+                <div class="action-button smooth-shadow"><img src="/images/curseforge.png"><p>CurseForge</p></div>
+                <div class="action-button smooth-shadow"><img src="/images/mods.png"><p>Mods</p></div>
+                <div class="action-button smooth-shadow"><img src="/images/map.png"><p>Map</p></div>
+                <div class="action-button smooth-shadow"><img src="/images/vc.png"><p>Voice Chat</p></div>
             </div>
         </div>
     </div>
