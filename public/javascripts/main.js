@@ -165,6 +165,10 @@ function sleep(interval) {
 
 
 window.onload = function() {
+
+    var modal = document.body.querySelector(".login-box");
+    modal.style.display = "none";
+
     const FDButts = new FDButtons();
     //Get all input elements and enable them
     var inputs = document.getElementsByClassName("fd-text-input");
