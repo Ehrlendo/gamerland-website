@@ -77,7 +77,7 @@ async function showLoginModal(element) {
     var modal = element.parentNode.querySelector(".login-box");
     if(modal.show == undefined) {
         modal.show = true;
-        modal.style.display = "block";
+        modal.style.display = "";
         return;
     }
 
@@ -85,7 +85,7 @@ async function showLoginModal(element) {
         modal.style.display = "none";
         modal.show = false;
     } else {
-        modal.style.display = "block";
+        modal.style.display = "";
         modal.show = true;
     
     }
