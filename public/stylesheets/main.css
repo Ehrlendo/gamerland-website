@@ -703,6 +703,22 @@ body.mobile #white-box > .wrapper > .action-buttons-wrapper > .action-button {
     border-radius: 1rem;
     z-index: 2;
     transition: all 100ms ease-in-out;
+    overflow: hidden;
+}
+
+#white-box > .wrapper > .card-content-wrapper .box iframe {
+    height: 100%;
+    width: 100%;
+    border: none;
+    padding: 1rem;
+    box-sizing: border-box;
+    animation: fade-in 100ms ease-in-out 400ms both;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+#white-box > .wrapper > .card-content-wrapper .box iframe.fade-in {
+    animation: fade-in 300ms ease-in-out both;
 }
 
 @keyframes s-c-b-1 { /*Acronym for 'show content box animation 1!*/

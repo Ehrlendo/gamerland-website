@@ -1,3 +1,14 @@
+body {
+  font-family: 'PT-sans', sans-serif;
+}
+
+.round {
+  border-radius: 1rem;
+}
+
+.white {
+  color: white;
+}
 
 .fd-text-input {  /*label*/
     line-height: 2.6rem;

@@ -148,7 +148,7 @@ async function showRegisterModal(element) {
         shade.addEventListener("click", removeModal);
 
     } else {
-        var modal = element.parentNode.querySelector(".register-box");
+        var modal = document.body.querySelector(".register-box");
         modal.classList.remove("mobile");
     }
 
@@ -332,16 +332,33 @@ function showBoxContents(type) {
         //Hide the placeholder image
         var img = document.querySelector("#white-box > div.image-display");
         img.style.opacity = "0";
-    } else {
 
+        //Add the iframe for content displaying
+        var iframe = document.createElement("iframe");
+        iframe.className = "interchangable-content";
+        box.appendChild(iframe);
+    } else {
+        var box = wr.querySelector(".box");
+        var iframe = box.querySelector(".interchangable-content");
+        iframe.style.animation = "fade-in 400ms ease-in-out";
+        setTimeout(()=>{
+            iframe.style.animation = "none";
+        }, 400)   
     }
 
     var box = wr.querySelector(".box");
+    var iframe = box.querySelector(".interchangable-content");
     if(type == 0) {
         box.style.borderRadius = "0 1rem 1rem 1rem";
     } else {
         box.style.borderRadius = "1rem";
     }
+
+    var sources = ["curseforge", "mods", "map", "voicechat"]
+    iframe.src="/" + sources[type];
+
+
+
 }
 
 function setRibbonPos(pos) {
