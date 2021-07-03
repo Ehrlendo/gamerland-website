@@ -1,5 +1,23 @@
-const minWidthToTriggerMobile = 600;
+const minWidthToTriggerMobile = 980;
 
+(()=>{
+    setInterval(()=>{
+        //Get website size
+        var width = document.documentElement.clientWidth || window.innerWidth;
+        var height = document.documentElement.clientHeight || window.innerHeight;
+        
+        if(width < minWidthToTriggerMobile) {
+            //Show mobile view instead
+            if(!document.body.classList.contains("mobile")) {
+                document.body.classList.add("mobile");
+            }
+        } else {
+            if(document.body.classList.contains("mobile")) {
+                document.body.classList.remove("mobile");
+            }
+        }
+    }, 100);
+})();
 function showContent() {
     //Get the screen height
     var h = document.documentElement.clientHeight;
@@ -261,4 +279,111 @@ function closeRegisterBox(el) {
     var sB = el.closest(".register-box");
     sB.style.display = "none";
     sB.show = false;
+}
+
+
+
+function showCardContents(el) {
+    var bts = el.parentNode.getElementsByClassName("action-button");
+    var x;
+    for(x of bts) {
+        x.style.borderRadius = "1rem";
+        x.style.backgroundColor = "#adadad";
+    }
+    //Change the borders of the button that has been clicked
+    el.style.borderRadius = "1rem 0 0 1rem";
+    el.style.backgroundColor = "#d3d3d3";
+    var type;
+    //Return the button index (type)
+    for(let i = 0; i < bts.length; i++) {
+        if(el.getAttribute("name") == bts[i].getAttribute("name")) {
+            type = i;
+        }
+    }
+    showBoxContents(type);
+    setRibbonPos(type);
+}
+
+function showBoxContents(type) {
+    var wr = document.querySelector("#white-box > div.wrapper > div.card-content-wrapper");
+    if(!wr.querySelector(".box")) {
+        //There is no beautiful box, create one
+        var box = document.createElement("div");
+        box.className = "box";
+        wr.appendChild(box);
+
+        //Set the appropriate animation
+        switch(type) {
+            case 0:
+                box.style.animation = "s-c-b-1 500ms cubic-bezier(0.33, 0.01, 0.17, 1.01) 80ms both";
+            break;
+            case 1:
+                box.style.animation = "s-c-b-2 500ms cubic-bezier(0.33, 0.01, 0.17, 1.01) 80ms both";
+            break;
+            case 2:
+                box.style.animation = "s-c-b-3 500ms cubic-bezier(0.33, 0.01, 0.17, 1.01) 80ms both";
+            break;
+            case 3:
+                box.style.animation = "s-c-b-4 500ms cubic-bezier(0.33, 0.01, 0.17, 1.01) 80ms both";
+            break;
+        }
+
+
+        //Hide the placeholder image
+        var img = document.querySelector("#white-box > div.image-display");
+        img.style.opacity = "0";
+    } else {
+
+    }
+
+    var box = wr.querySelector(".box");
+    if(type == 0) {
+        box.style.borderRadius = "0 1rem 1rem 1rem";
+    } else {
+        box.style.borderRadius = "1rem";
+    }
+}
+
+function setRibbonPos(pos) {
+    var ribbon = document.querySelector("#white-box > div.wrapper > div.connector-ribbon");
+    if(!ribbon.classList.contains("activated")) {
+        ribbon.classList.add("activated");
+    }
+    var top = ribbon.children[0];
+    var middle = ribbon.children[1];
+    var bottom = ribbon.children[2];
+
+    var values = [
+        {top:0,bottom:"calc(100% - 7rem)"},
+        {top:"7.8rem",bottom: "calc(100% - 7.8rem - 7rem)"},
+        {top:"calc(7.8rem * 2)",bottom: "calc(100% - (7.8rem*2) - 7rem)"},
+        {top:"calc(7.8rem * 3)", bottom: "calc(100% - (7.8rem*3) - 7rem)"}
+    ];
+
+    top.style.height = values[pos].top;
+    bottom.style.height = values[pos].bottom;
+}
+
+
+function showModal() {
+    var modalBkg = document.createElement("div");
+    modalBkg.className = "fp-modal-bkg";
+    document.body.appendChild(modalBkg);
+    modalBkg.addEventListener("click", (e)=>{
+        document.body.querySelector(".fp-modal").kill();
+    })
+
+    var modal = document.createElement("div");
+    modal.className = "fp-modal";
+    modal.background = modalBkg;
+    document.body.appendChild(modal);
+
+    //Define the modal kill function
+    modal.kill = ()=>{
+        var bkg = document.querySelector(".fp-modal-bkg");
+        bkg.parentNode.removeChild(bkg);
+        modal.parentNode.removeChild(modal);
+    }
+
+    return modal;
 }

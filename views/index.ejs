@@ -114,15 +114,24 @@
     <div id="content"></div>
     
     <div id="white-box" class="smooth-shadow">
-        <div class="arrow-indicator smooth-shadow"><i class="material-icons">expand_less</i></div>
+        <div class="arrow-indicator"><i class="material-icons">expand_less</i></div>
+        <div class="image-display"><img src="/images/iconMods.png"></div>
         <div class="wrapper">
             <div class="action-buttons-wrapper">
-                <div class="action-button smooth-shadow"><img src="/images/iconCurseForge.png"><p>CurseForge</p></div>
-                <div class="action-button smooth-shadow"><img src="/images/iconMods.png"><p>Mods</p></div>
-                <div class="action-button smooth-shadow"><img src="/images/iconMap.png"><p>Map</p></div>
-                <div class="action-button smooth-shadow"><img src="/images/iconVoiceChat.png"><p>Voice Chat</p></div>
+                <div class="action-button" name="curseforge" onclick="showCardContents(this)"><img src="/images/iconCurseForge.png"><p>CurseForge</p></div>
+                <div class="action-button" name="mods" onclick="showCardContents(this)"><img src="/images/iconMods.png"><p>Mods</p></div>
+                <div class="action-button" name="map" onclick="showCardContents(this)"><img src="/images/iconMap.png"><p>Map</p></div>
+                <div class="action-button" name="voicechat" onclick="showCardContents(this)"><img src="/images/iconVoiceChat.png"><p>Voice Chat</p></div>
             </div>
-        </div>
+            <div class="connector-ribbon">
+                <div class="top"></div>
+                <div class="middle"></div>
+                <div class="bottom"></div>
+            </div>
+            <div class="card-content-wrapper">
+    
+            </div>
+        </div>  
     </div>
 
 </body>
