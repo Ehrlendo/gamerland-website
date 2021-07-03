@@ -201,6 +201,11 @@ body {
   color: white;
 }
 
+.button.fd-design:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 .button.fd-design.blue {
   background-color: var(--color-two);
 }

@@ -245,6 +245,24 @@ function signInClient(e) {
 
 function registerUser(e) {
     e.preventDefault();
+
+    var form = e.target.parentNode;
+    var inps = form.getElementsByTagName("label");
+
+    var name = inps[0].querySelector(".fd-text-input__action").value;
+    var disc = inps[1].querySelector(".fd-text-input__action").value;
+    
+    if(name.trim().length < 5 || name.trim().length < 5 && disc.trim().length < 3) {
+        e.target.innerHTML = "Begge feltene kan ikke være tomme";
+        return;
+    }
+
+    e.target.innerHTML = "Laster"
+    e.target.disabled = true;
+    setTimeout(()=>{
+        e.target.innerHTML = "Prøv igjen senere"
+        e.target.disabled = false;
+}, 1000)
 }
 
 
