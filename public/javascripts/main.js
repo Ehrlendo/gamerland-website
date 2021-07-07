@@ -257,12 +257,35 @@ function registerUser(e) {
         return;
     }
 
-    e.target.innerHTML = "Laster"
-    e.target.disabled = true;
+    var submButt = e.target;
+
+    submButt.innerHTML = "Laster"
+    submButt.disabled = true;
+
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/register");
+
+    var formData = new FormData();
+    formData.append("usrName", name + '');
+    formData.append("discord", disc + '');
+
+    xhr.send(formData);
+    xhr.onreadystatechange = function() {
+        if(this.status == 200 && this.readyState == 4) {
+            //OK
+        } else if(this.status != 200 && this.readyState == 4) {
+            //ERROR
+            submButt.innerHTML = "Noe gikk galt";
+            submButt.disabled = false;
+        }
+    }
+/*
     setTimeout(()=>{
-        e.target.innerHTML = "Prøv igjen senere"
-        e.target.disabled = false;
+        submButt.innerHTML = "Prøv igjen senere"
+        submButt.disabled = false;
 }, 1000)
+*/
 }
 
 

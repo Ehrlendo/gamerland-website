@@ -7,6 +7,13 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+router.post("/register", function(req, res) {
+  console.log(req.body);
+})
+
+
+
+
 router.get('/mods', function(req, res, next) {
   res.render('./tutorials/mods');
 });
