@@ -6,15 +6,25 @@ const useragent = require("express-useragent");
 const { Pool, Client } = require("pg");
 const session = require("express-session");
 var pool;
+if(process.env.DEVELOPMENT) {
+  console.log("iojubasjbdbiasdibja")
 
+  pool = new Pool({
+    host: 'localhost',
+    user: process.env.LUSR,
+    password: process.env.LPASS,
+    database: process.env.LDB
+  })
+} else {
 
-pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl:{
-    rejectUnauthorized: false
-  }
-})
-
+  pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl:{
+      rejectUnauthorized: false
+    }
+  })
+}
+  
 pool.on("error", (err, client) => {
   console.log("Unexpected error ", err);
   process.exit(-1);
