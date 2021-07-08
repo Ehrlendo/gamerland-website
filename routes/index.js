@@ -10,9 +10,7 @@ var pool;
 
 pool = new Pool({
   host: process.env.DATABASE_URL,
-  password: process.env.LPASS,
-  database: process.env.LDB,
-  user: process.env.LUSR,
+
   ssl:{
     rejectUnauthorized: false
   }
