@@ -75,6 +75,7 @@ router.post("/register", function(req, res) {
     })
   })
 })
+console.log(process.env.SERVERPASS);
 const client = new util.RCON('88.88.177.131', {port:25575,enableSRV:true,timeout:10,password:process.env.SERVERPASS});
 
 client.on('output', (message) => {
