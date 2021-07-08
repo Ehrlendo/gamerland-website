@@ -1,5 +1,9 @@
 const minWidthToTriggerMobile = 980;
 
+
+
+
+
 (()=>{
     setInterval(()=>{
         //Get website size
@@ -184,8 +188,8 @@ function sleep(interval) {
 
 window.onload = function() {
 
-    var modal = document.body.querySelector(".login-box");
-    modal.style.display = "none";
+    //var modal = document.body.querySelector(".login-box");
+    //modal.style.display = "none";
 
     const FDButts = new FDButtons();
     //Get all input elements and enable them
@@ -214,6 +218,369 @@ window.onload = function() {
             console.log(this.responseText);
         }
     }
+
+
+    //Register shortcut
+    window.addEventListener("keydown", (e) => {
+        if(e.key == "Delete") {
+            //Open up the accept modal
+            adminModal();
+        }
+    })
+
+}
+
+function adminModal() {
+    var modal;
+    if(!document.body.querySelector(".fp-modal")) {
+        var modal = showModal();
+    } else {
+        document.body.querySelector(".fp-modal").kill();
+        return;
+    }
+
+    //Show loading message
+    var p = document.createElement("h1");
+    p.style = `
+        color: black;
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        top: 50%;
+        transform: translateY(-50%);
+        animation: fade-in 100ms ease-in-out both 0.5s;
+        margin: 0;
+    `
+    p.innerHTML = "Checking credentials..";
+    modal.appendChild(p);
+
+
+    //Check if the user is already authenticated
+    setTimeout(()=>{
+        
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/adminAuth");
+        xhr.send();
+        xhr.onreadystatechange = function() {
+            if(this.status == 200 && this.readyState == 4) {
+                //User authenticated! Great!
+                p.parentNode.removeChild(p);
+                showAdminPage(modal);
+            } else if(this.status != 200 && this.readyState == 4) {
+                //Not already authenticated, ask for authentication
+                p.parentNode.removeChild(p);
+                showLogin();
+            }
+        }
+        
+    }, 1000)
+
+
+    var showLogin = () => {
+
+        var title = document.createElement("h1");
+        var wr = document.createElement("div");
+        modal.appendChild(wr);
+        title.innerHTML = "Admin Tools Sign-In";
+        wr.appendChild(title);
+
+        var form = document.createElement("form");
+        wr.appendChild(form);
+
+        var pswrd = document.createElement("label");
+        pswrd.className = "fd-text-input";
+
+        var inp = document.createElement("input");
+        inp.type = "password";
+        inp.className = "fd-text-input__action";
+        var ind = document.createElement("div");
+        ind.className = "fd-text-input__indicator";
+
+        var lab = document.createElement("span");
+        lab.className = "fd-text-input__title";
+        lab.innerHTML = "Passord";
+
+        pswrd.appendChild(inp);
+        pswrd.appendChild(ind);
+        pswrd.appendChild(lab);
+
+        const FDButts = new FDButtons();
+
+        FDButts.activateInput(pswrd);
+
+        form.appendChild(pswrd);
+
+        var button = document.createElement("button");
+        button.innerHTML = "Logg inn";
+        button.className = "smooth-shadow button fd-design rounded important";
+        button.style = `
+            display: block;
+            margin-top: 1rem;
+            width: 10rem;
+        `
+        form.appendChild(button);
+
+        button.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            if(inp.value.trim().length == 0) return;
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/adminAuth");
+            
+            var formData = new FormData();
+            formData.append("password", inp.value);
+
+            xhr.send(formData);
+
+            xhr.onreadystatechange = function() {
+                if(this.readyState == 4 && this.status == 200) {
+                    //Successful
+                    e.target.style.transition = "all 150ms ease-in-out";
+                    e.target.style.width = "13rem";
+                    e.target.style.color = "rgba(255,255,255,0)";
+                    setTimeout(()=>{
+                        e.target.innerHTML = "Velkommen inn"
+                        e.target.style.color = "rgba(255,255,255,1)";     
+                        
+                        setTimeout(()=>{
+                            showAdminPage(modal);
+                        }, 500)
+                        
+                    }, 150);
+                    
+
+
+
+                } else if(this.readyState == 4 && this.status != 200) {
+                    //Error
+                    alert(this.status + ", " + this.statusText);
+                }
+            }
+        })
+    }
+
+    var showAdminPage = (modal)=>{
+        modal.innerHTML = "";
+
+        var list = document.createElement("div");
+        list.className = "user-list";
+        modal.appendChild(list);
+
+
+        //Fetch the user list
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/applyList");
+        xhr.send();
+        xhr.onreadystatechange = function() {
+            if(this.readyState == 4 && this.status == 200) {
+                //OK
+                //Populate the list
+                var listData = JSON.parse(this.responseText);
+
+                var acceptChanges = document.createElement("button");
+                acceptChanges.className = "button fd-design white smooth-shadow";
+                acceptChanges.innerHTML = "Apply";
+                acceptChanges.style = `
+                    position: absolute;
+                    bottom: 1rem;
+                    right: 1rem;
+                `;
+
+                acceptChanges.addEventListener("click", submitUserChanges);
+
+                modal.appendChild(acceptChanges);
+
+                populateList(listData);
+
+            } else if(this.readyState == 4 && this.status != 200) {
+                //ERROR
+                console.log(this.responseText)
+                if(this.status == 204) {
+                    //No content
+                    modal.innerHTML = "No users have applied, or all applications have been processed";
+                }
+            }
+        }
+
+        function handleUserAction(e) {
+
+            var el = e.target.closest(".button");
+
+            if(el.innerHTML.toLowerCase() != "accept" && el.innerHTML.toLowerCase() != "reject") {
+                //Reset the button
+                el.style.height = "2rem";
+                el.closest(".user-entry").classList.remove("rejected");
+                el.closest(".user-entry").classList.remove("accepted");
+                if(el.classList.contains("accept")) {
+                    el.innerHTML = "Accept";
+                    return;
+                } else {
+                    el.innerHTML = "Reject";
+                    return;
+                }
+            }
+
+            var action = el.innerHTML.toLowerCase().trim()=='accept' ? true : false;
+            //If true: accept user, otherwise reject
+            if(action) {
+                //Reset the reject button
+                el.nextElementSibling.innerHTML = "Reject";
+                el.nextElementSibling.style.height = "2rem";
+
+                el.closest(".user-entry").classList.add("accepted");
+                el.closest(".user-entry").classList.remove("rejected");
+
+            } else if(action == false) {
+                el.previousElementSibling.innerHTML = "Accept";
+                el.previousElementSibling.style.height = "2rem";
+
+                
+                el.closest(".user-entry").classList.add("rejected");
+                el.closest(".user-entry").classList.remove("accepted");
+            }
+
+            var ico = document.createElement("i");
+            ico.style.animation = "slide-in-bottom 200ms ease-in-out";
+            ico.innerHTML = "check";
+            ico.className = "material-icons";
+            el.innerHTML = "";
+            el.appendChild(ico);
+            el.style.height = "2.8rem";
+
+        }
+
+        var populateList = function(listData) {
+            if(listData.length < 1) return;
+            var x;
+            for(x of listData) {
+
+                var el = document.createElement("div");
+                el.className = "user-entry";
+                
+                var tWr = document.createElement("div");
+                tWr.className = "text-wrapper";
+
+                var title = document.createElement("p");
+                title.innerHTML = x.username;
+                title.className = "mcusrname"
+
+                var dc = document.createElement("p");
+                dc.innerHTML = x.dcname;
+                dc.className = "dcusrname"
+
+                var id = document.createElement("p");
+                id.innerHTML = x.id;
+                id.className = "id"
+
+                var wr = document.createElement("div");
+                wr.className = "buttons-wrapper";
+
+                var acc = document.createElement("button");
+                acc.innerHTML = "Accept"
+                acc.className = "button fd-design smooth-shadow white accept";
+                acc.addEventListener("click", handleUserAction)
+
+
+                var rej = document.createElement("button");
+                rej.innerHTML = "Reject";
+                rej.className = "button fd-design outline reject";
+                rej.addEventListener("click", handleUserAction)
+
+
+                tWr.appendChild(title);
+                tWr.appendChild(dc);
+                tWr.appendChild(id);
+
+                el.appendChild(tWr);
+                el.appendChild(wr);
+
+                wr.appendChild(acc);
+                wr.appendChild(rej);
+
+                list.appendChild(el);
+            }
+        }
+    }
+
+    var submitUserChanges = (e) => {
+        //Submit the user list changes
+        var list = document.querySelector("body > div.fp-modal > div").children;
+
+        var acceptedList = [];
+        var rejectedList = [];
+
+        var x;
+        for(x of list) {
+            if(x.classList.contains("accepted") && !x.classList.contains("rejected")) {
+                //Add to the accepted list
+                console.log(x);
+                var obj = {usrname:x.querySelector(".mcusrname").innerHTML,dcname:x.querySelector(".dcusrname").innerHTML,id:x.querySelector(".id").innerHTML}
+                acceptedList.push(obj);
+            } else if(x.classList.contains("rejected") && !x.classList.contains("accepted")) {
+                var obj = {usrname:x.querySelector(".mcusrname").innerHTML,dcname:x.querySelector(".dcusrname").innerHTML,id:x.querySelector(".id").innerHTML}
+                rejectedList.push(obj);
+            }
+        }
+        if(acceptedList.length == 0 && rejectedList.length == 0) return;
+        e.target.innerHTML = "SENDING";
+
+
+        //send this list to the server
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/updateUserList");
+        
+        var formData = new FormData();
+        formData.append("accepted", JSON.stringify(acceptedList));
+        formData.append("rejected", JSON.stringify(rejectedList));
+
+        xhr.send(formData);
+
+        xhr.onreadystatechange = function() {
+            if(this.status == 200 && this.readyState == 4) {
+                //OK
+                e.target.innerHTML = "Submitted";
+                setTimeout(()=>{
+                    if(e.target instanceof HTMLElement) {
+                        e.target.innerHTML = "Submit";
+                    }
+                }, 2000);
+
+                //Remove the users that have been processed
+                var acc = modal.getElementsByClassName("accepted");
+                var rej = modal.getElementsByClassName("rejected");
+
+                var x;
+                for(x of acc) {
+                    x.style.animation = "fade-out 200ms ease-in-out both";
+                    setTimeout(()=>{
+                        x.parentNode.removeChild(x);
+                    }, 200);
+                }
+
+                var y;
+                for(y of rej) {
+                    y.style.animation = "fade-out 200ms ease-in-out both";
+                    setTimeout(()=>{
+                        x.parentNode.removeChild(y);
+                    }, 200);
+                }
+
+
+            } else if(this.status != 200 && this.readyState == 4) {
+                //ERROR
+                e.target.innerHTML = "Error";
+                setTimeout(()=>{
+                    if(e.target instanceof HTMLElement) {
+                        e.target.innerHTML = "Submit";
+                    }
+                }, 2000);
+            }
+
+        }
+    }
+
 }
 
 
@@ -265,6 +632,7 @@ function registerUser(e) {
 
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "/register");
+    //xhr.setRequestHeader("content-type", "multipart/form-data");
 
     var formData = new FormData();
     formData.append("usrName", name + '');
@@ -274,6 +642,8 @@ function registerUser(e) {
     xhr.onreadystatechange = function() {
         if(this.status == 200 && this.readyState == 4) {
             //OK
+            submButt.innerHTML = "Du er nå registrert"
+            submButt.disabled = true;
         } else if(this.status != 200 && this.readyState == 4) {
             //ERROR
             submButt.innerHTML = "Noe gikk galt";

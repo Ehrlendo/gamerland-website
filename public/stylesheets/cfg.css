@@ -200,7 +200,7 @@ body {
   padding: 0.5rem 2rem;
   border: none;
   outline: none;
-  background-color: var(--color-one);
+  background-color: var(--color-two);
   font-family: 'PT Sans', sans-serif;
   text-transform: uppercase;
   cursor: pointer;

@@ -22,7 +22,35 @@ body {
     font-family: 'PT Sans', sans-serif;
 }
 
+.fp-modal {
+    animation: fade-in 200ms ease-in-out;
+    overflow: hidden;
+    color: black;
+}
 
+.fp-modal > div > h1 {
+    color: black;
+    margin: 0 0 1rem 0;
+}
+
+.fp-modal > div {
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+
+#warning-banner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(255,50,50,0.5);
+    width: 100%;
+    color: white;
+    z-index: 1000;
+    height: fit-content;
+    margin: 0;
+    text-align: center;
+}
 
 #top {
     height: 100vh;
@@ -469,6 +497,11 @@ body {
     100%{opacity:1}
 }
 
+@keyframes fade-out {
+    0%{opacity: 1}
+    100%{opacity: 0}
+}
+
 
 
 
@@ -802,4 +835,83 @@ body.mobile #white-box > .wrapper > .action-buttons-wrapper > .action-button {
     position: absolute;
     top:0;
     left:0;
+}
+
+/*ADMIN TOOL STYLING*/
+.user-list {
+    height: 100%;
+    width: 100%;
+    background-color: var(--color-two);
+    animation: fade-in 150ms ease-in-out;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 2rem !important;
+    box-sizing: border-box;
+}
+
+.user-list .user-entry {
+    width: 100%;
+    max-width: 50rem;
+    height: 3rem;
+    display: block;
+    color: white;
+}
+
+.user-list .user-entry > * {
+    display: inline-block; 
+    vertical-align: top; 
+    margin: 0;
+    max-width: 30%;
+}
+
+.user-list .user-entry > *:not(:first-of-type) {
+    margin-left: 1rem;
+}
+
+.user-list .user-entry > div > button {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.user-list .user-entry > div > button:not(:first-of-type) {
+    margin-left: 1rem;
+}
+
+
+.user-list .user-entry .buttons-wrapper {
+    float: right; 
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
+    width: fit-content;
+    vertical-align: top;
+    margin-left: 1rem;
+}
+
+.user-list .user-entry .buttons-wrapper button {
+    min-width: 10rem;
+    overflow: hidden;
+    height: 2rem;
+}
+
+.user-list .user-entry .buttons-wrapper button:hover {
+    transform: none !important;
+}
+
+.user-list .user-entry .text-wrapper {
+    height: 100%;
+    width: fit-content;
+    display: inline-flex;
+    float: left;
+    align-items: center;
+}
+
+.user-list .user-entry .text-wrapper > p {
+    min-width: 10rem !important;
+    max-width: 30%;
+    overflow: hidden;
+}
+
+.user-list .user-entry .text-wrapper > p:not(:first-of-type) {
+    margin-left: 1rem;
 }
