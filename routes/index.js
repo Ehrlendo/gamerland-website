@@ -75,6 +75,13 @@ router.post("/register", function(req, res) {
     })
   })
 })
+const client = new util.RCON('88.88.177.131', {port:25575,enableSRV:true,timeout:10,password:process.env.SERVERPASS});
+
+client.on('output', (message) => {
+  console.log(message);
+
+  client.close();
+})
 
 
 router.post("/updateUserList", async function(req, res) {
@@ -82,11 +89,21 @@ router.post("/updateUserList", async function(req, res) {
   //Perform sanitation
   var acceptedList = req.body.accepted.trim().length!=0 ? JSON.parse(req.body.accepted) : undefined;
   var rejectedList = req.body.rejected.trim().length!=0 ? JSON.parse(req.body.rejected) : undefined;
+  function runServerCommand(usrname) {
+      client.connect()
+      .then(()=>{client.run('whitelist add ' + usrname)})
+      .catch((error)=>{
+        console.error(error);
+      })
+  }
+  
+  
   try {
     var x;
     if(acceptedList) {
       for(x of acceptedList) {
         await sendAccepted(x);
+        runServerCommand(x.usrname);
       }  
     }
 
@@ -217,7 +234,7 @@ router.get('/map', function(req, res, next) {
 router.get('/voicechat', function(req, res, next) {
   res.render('./tutorials/voicechat');
 });
-
+/*
 router.get("/mc/server/status", async function(req,res) {
   updateServerData()
   .then(response=>{
@@ -226,7 +243,7 @@ router.get("/mc/server/status", async function(req,res) {
   .catch(error=>{
     res.status(500).send(error);
   })
-})
+})*/
 
 
 function updateServerData(){
