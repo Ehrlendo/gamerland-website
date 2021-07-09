@@ -230,6 +230,108 @@ window.onload = function() {
 
 }
 
+function showServConsole(e) {
+    var el = e.target;
+    var buttons = el.closest(".page-buttons").children;
+    
+    var x;
+    for(x of buttons) {
+        x.classList.remove("outline");
+        x.classList.remove("smooth-shadow");
+        x.classList.add("white");
+    }
+
+    el.classList.add("outline");
+    el.classList.add("smooth-shadow");
+    el.classList.remove("white");
+
+
+    var modal = document.body.querySelector(".fp-modal");
+    if(modal.querySelector(".user-list")) {
+        modal.querySelector(".user-list").style.display = "none";
+    }
+
+    var createConsole = ()=>{
+        var cons = document.createElement("div");
+        cons.className = "server-console";
+        modal.appendChild(cons);
+
+        var title = document.createElement("h1");
+        title.innerHTML = "Gamerland 5 Server Console";
+        cons.appendChild(title);
+    
+        var body = document.createElement("div");
+        body.className = "console-body smooth-shadow"
+        cons.appendChild(body)
+
+
+        var feedB = document.createElement("div");
+        feedB.className = "server-feedback";
+        body.appendChild(feedB);
+
+        var inpB = document.createElement("form");
+        inpB.className = "input-form";
+        body.appendChild(inpB);
+
+        var field = document.createElement("input");
+        inpB.appendChild(field);
+
+        var sendServCommand = (e)=>{
+            e.preventDefault();
+            var command = e.target.previousElementSibling.value.trim();
+            if(command.length == 0) return;
+            e.target.innerHTML = "Sending";
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/consoleCommand");
+    
+            var form = new FormData();
+            form.append("command", command);
+    
+            xhr.send(form);
+    
+            xhr.onreadystatechange = function() {
+                if(this.readyState == 4 && this.status == 200) {
+                    //OK
+                    e.target.innerHTML = "Submit";
+                } else {
+                    e.target.innerHTML = "error";
+                    console.log(this.status);
+                }
+            }
+        }
+
+        var subm = document.createElement("button");
+        subm.className = "button fd-design";
+        inpB.appendChild(subm);
+        subm.innerHTML = "SUBMIT";
+        subm.addEventListener("click", sendServCommand);
+    }
+
+    if(!modal.querySelector(".server-console")) {
+        createConsole();
+    }
+
+
+
+
+}
+
+function showApplicantList(e) {
+    var el = e.target;
+    var buttons = el.closest(".page-buttons").children;
+    
+    var x;
+    for(x of buttons) {
+        x.classList.remove("outline");
+        x.classList.remove("smooth-shadow");
+        x.classList.add("white");
+    }
+    
+    el.classList.add("outline");
+    el.classList.add("smooth-shadow");
+    el.classList.remove("white");
+}
+
 function adminModal() {
     var modal;
     if(!document.body.querySelector(".fp-modal")) {
@@ -362,6 +464,23 @@ function adminModal() {
 
     var showAdminPage = (modal)=>{
         modal.innerHTML = "";
+
+        //Create the page buttons
+        var buttonsCont = document.createElement("div");
+        buttonsCont.className = "page-buttons";
+        modal.appendChild(buttonsCont);
+
+        var console = document.createElement("button");
+        console.className = "button fd-design white";
+        console.innerHTML = "Server Console";
+        buttonsCont.appendChild(console);
+        console.addEventListener("click", showServConsole);
+
+        var apL = document.createElement("button");
+        apL.className = "button fd-design outline smooth-shadow";
+        apL.innerHTML = "Application list";
+        buttonsCont.appendChild(apL);        
+        apL.addEventListener("click", showApplicantList);
 
         var list = document.createElement("div");
         list.className = "user-list";
@@ -504,25 +623,30 @@ function adminModal() {
         }
     }
 
+
+
+
     var submitUserChanges = (e) => {
         //Submit the user list changes
-        var list = document.querySelector("body > div.fp-modal > div").children;
+        var list = document.querySelector("body > div.fp-modal > .user-list").children;
 
         var acceptedList = [];
         var rejectedList = [];
 
-        var x;
-        for(x of list) {
-            if(x.classList.contains("accepted") && !x.classList.contains("rejected")) {
+        var y;
+        console.log(list)
+        for(y of list) {
+            if(y.classList.contains("accepted") && !y.classList.contains("rejected")) {
                 //Add to the accepted list
-                console.log(x);
-                var obj = {usrname:x.querySelector(".mcusrname").innerHTML,dcname:x.querySelector(".dcusrname").innerHTML,id:x.querySelector(".id").innerHTML}
+                console.log(y);
+                var obj = {usrname:y.querySelector(".mcusrname").innerHTML,dcname:y.querySelector(".dcusrname").innerHTML,id:y.querySelector(".id").innerHTML}
                 acceptedList.push(obj);
-            } else if(x.classList.contains("rejected") && !x.classList.contains("accepted")) {
-                var obj = {usrname:x.querySelector(".mcusrname").innerHTML,dcname:x.querySelector(".dcusrname").innerHTML,id:x.querySelector(".id").innerHTML}
+            } else if(y.classList.contains("rejected") && !y.classList.contains("accepted")) {
+                var obj = {usrname:y.querySelector(".mcusrname").innerHTML,dcname:y.querySelector(".dcusrname").innerHTML,id:y.querySelector(".id").innerHTML}
                 rejectedList.push(obj);
             }
         }
+        console.log(acceptedList,rejectedList)
         if(acceptedList.length == 0 && rejectedList.length == 0) return;
         e.target.innerHTML = "SENDING";
 
@@ -536,7 +660,6 @@ function adminModal() {
         formData.append("rejected", JSON.stringify(rejectedList));
 
         xhr.send(formData);
-
         xhr.onreadystatechange = function() {
             if(this.status == 200 && this.readyState == 4) {
                 //OK

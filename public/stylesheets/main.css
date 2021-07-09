@@ -915,3 +915,69 @@ body.mobile #white-box > .wrapper > .action-buttons-wrapper > .action-button {
 .user-list .user-entry .text-wrapper > p:not(:first-of-type) {
     margin-left: 1rem;
 }
+
+.fp-modal .page-buttons {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: fit-content;
+    height: fit-content;
+}
+
+.fp-modal .page-buttons button:not(:first-of-type) {
+    margin-left: 1rem;
+}
+
+.fp-modal .server-console {
+    height: 100%;
+    width: 100%;
+    background-color: rgb(200,100,100);
+    animation: fade-in 200ms ease-in-out;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 3rem auto 4rem;
+}
+
+.fp-modal .server-console > h1 {
+    color: white;
+    font-weight: lighter;
+
+}
+
+.fp-modal .server-console .console-body {
+    background-color: white;
+    height: 100%;
+    width: 100%;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.fp-modal .server-console .console-body .server-feedback {
+    height: calc(100% - 2rem);
+    width: 100%;
+
+}
+
+.fp-modal .server-console .console-body .input-form {
+    height: 2rem;
+    width: 100%;
+    background-color: rgba(200,200,200,0.5);
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+
+.fp-modal .server-console .console-body .input-form input {
+    width: calc(100% - 1rem - 7rem);
+}
+
+.fp-modal .server-console .console-body .input-form button:hover {
+ transform: none;
+}
+
+.fp-modal .server-console .console-body .input-form button {
+    margin-left: 1rem;
+    width: 7rem;
+}

@@ -85,6 +85,34 @@ client.on('output', (message) => {
 })
 
 
+function runConsoleCommand(command) {
+  return new Promise((resolve, reject) => {
+
+    client.connect()
+    .then(()=>{client.run(command); resolve();})
+    .catch((error)=>{
+      console.error(error);
+      reject(error)
+    })
+  })
+}
+
+router.post("/consoleCommand", async function(req, res) {
+  if(!req.session.adminAuthed) {res.status(503).send({message:"not authorized!"})}
+  //Perform sanitation
+  var command = req.body.command.trim().length!=0 ? req.body.command : undefined;
+  runConsoleCommand(command)
+  .then(()=>{
+    res.status(200).send();
+  })
+  .catch((error)=>{
+    res.status(500).send()
+  })
+})
+
+
+
+
 router.post("/updateUserList", async function(req, res) {
   if(!req.session.adminAuthed) {res.status(503).send({message:"not authorized!"})}
   //Perform sanitation
