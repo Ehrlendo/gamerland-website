@@ -187,7 +187,7 @@ function sleep(interval) {
 
 
 window.onload = function() {
-
+    countdownInit();
     //var modal = document.body.querySelector(".login-box");
     //modal.style.display = "none";
 
@@ -1019,4 +1019,75 @@ function toggleFastenButton(el) {
         el.children[0].innerHTML = "lock_open";
         el.children[1].innerHTML = "Fest fanen";
     }
+}
+
+
+//COUNTDOWN TIMER CODE
+const countDownTo = "13/07/2021&18:00";
+function countdownInit() {
+    //Check if the countdown is finished or not
+    var date = new Date();
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+
+    var hr = date.getHours();
+    var min = date.getMinutes();
+
+
+    var splitDate = countDownTo.split("&")[0].split("/");
+    
+    var Tday = parseInt(splitDate[0]);
+    var Tmonth = parseInt(splitDate[1]);
+    var Tyear = parseInt(splitDate[2]);
+
+    var splitTime = countDownTo.split("&")[1].split(":");
+
+    var Thr = parseInt(splitTime[0]);
+    var Tmin = parseInt(splitTime[1]);
+
+    //Create the future date object
+    var future = new Date();
+    future.setDate(Tday);
+    future.setMonth(Tmonth-1);
+    future.setFullYear(Tyear);
+    future.setHours(Thr);
+    future.setMinutes(Tmin);
+    //The time parameters matches
+    var timer = document.body.querySelector("#countdown-timer");
+    var ctdwn;
+    if(!timer.hasChildNodes()) {
+        ctdwn = document.createElement("p");
+        ctdwn.className = "countdown"
+        timer.appendChild(ctdwn);
+    } else {
+        ctdwn = timer.querySelector(".countdown");
+    }
+
+    setInterval(()=>{
+        var date = new Date();
+        if(future >= date) {
+            //Not yet!
+            //get seconds between times
+            var delta = Math.abs(future - date) / 1000;
+            
+            // calculate (and subtract) whole days
+            var days = Math.floor(delta / 86400);
+            delta -= days * 86400;
+
+            // calculate (and subtract) whole hours
+            var hours = Math.floor(delta / 3600) % 24;
+            delta -= hours * 3600;
+
+            // calculate (and subtract) whole minutes
+            var minutes = Math.floor(delta / 60) % 60;
+            delta -= minutes * 60;
+
+            // what's left is seconds
+            var seconds = Math.round(delta % 60);
+
+
+            ctdwn.innerHTML = days + " dager " + hours + " timer " + minutes + " minutter og " + seconds + " sekunder til åpning";
+        }
+    }, 1000)
 }
