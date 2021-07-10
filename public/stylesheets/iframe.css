@@ -18,7 +18,19 @@ a {
 
 h1 {
     color: var(--color-two);
-    text-shadow: 1px 1px 8px rgba(150, 150, 150, 1);
+    position: relative;
+}
+
+h1::after {
+    width: 40%;
+    height:2px;
+    opacity: 0.5;
+    position: absolute;
+    background-color: var(--color-two);
+    bottom: 0;
+    left: 0;
+    content: ".";
+    color: transparent;
 }
 
 h2 {
@@ -31,4 +43,10 @@ h3 {
     color: var(--color-three);
     font-weight: lighter;
     margin: 1rem 0 0.1rem;
+    font-size: 1.3rem;
+    background-color: rgba(255,255,255,0.4);
+    padding: 0.2rem;
+    border-radius: 0.5rem;
+    width: fit-content;
+
 }

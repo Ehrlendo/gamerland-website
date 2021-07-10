@@ -668,7 +668,7 @@ body.mobile #white-box > .wrapper {
 #white-box > .wrapper > .action-buttons-wrapper > .action-button {
     height: 7rem;
     width: 100%;
-    background-color: #adadad;
+    background-color: #A4B9C4;
     border-radius: 1rem;
     cursor: pointer;
     overflow: hidden;
@@ -739,7 +739,7 @@ body.mobile #white-box > .wrapper > .action-buttons-wrapper > .action-button {
 
 #white-box > .wrapper .connector-ribbon .middle {
     height: 7rem;
-    background-color: #d3d3d3;
+    background-color: #CEDBE2;
 }
 
 #white-box > .wrapper .connector-ribbon .top, .bottom{
@@ -757,7 +757,7 @@ body.mobile #white-box > .wrapper > .action-buttons-wrapper > .action-button {
 #white-box > .wrapper > .card-content-wrapper .box {
     height: 100%;
     width: 100%;
-    background-color: #d3d3d3;
+    background-color: #CEDBE2;
     border-radius: 1rem;
     z-index: 2;
     transition: all 100ms ease-in-out;

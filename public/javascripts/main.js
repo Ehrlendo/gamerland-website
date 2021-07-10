@@ -890,11 +890,11 @@ function showCardContents(el) {
     var x;
     for(x of bts) {
         x.style.borderRadius = "1rem";
-        x.style.backgroundColor = "#adadad";
+        x.style.backgroundColor = "#A4B9C4";
     }
     //Change the borders of the button that has been clicked
     el.style.borderRadius = "1rem 0 0 1rem";
-    el.style.backgroundColor = "#d3d3d3";
+    el.style.backgroundColor = "#CEDBE2";
     var type;
     //Return the button index (type)
     for(let i = 0; i < bts.length; i++) {
