@@ -16,7 +16,6 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-
 app.use(session({
   key: 'session.sid',
   secret: 'Some secret key',
@@ -26,6 +25,7 @@ app.use(session({
     maxAge: null
   }
 }));
+
 app.use(upload.array());
 app.use(express.static("public"));
 app.use(logger('dev'));

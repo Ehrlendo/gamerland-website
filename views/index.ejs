@@ -89,12 +89,15 @@
     <div id="top">
         <div class="content">
             <div class="title">
-                <p>Velkommen til</p>
-                <p>Gamerland 5</p>
+                <p>mc.gamerland.no</p>
             </div>
 
             <div class="body">
-                <!--<p>Der morra di er mann</p>-->
+                <ul>
+                    <li class="is-online">loading</li>
+                    <li class="ping">loading</li>
+                    <li class="players">loading</li>
+                </ul>
             </div>
             <div class="button-wrapper">
                 <button class="button fd-design white rounded smooth-shadow" onclick="showRegisterModal(document.querySelector('#header > div > button'))">Bli med</button>
@@ -123,6 +126,7 @@
             </div>
         </div>  
     </div>
+    <script src="/socket.io/socket.io.js"></script>
 
 </body>
 </html>

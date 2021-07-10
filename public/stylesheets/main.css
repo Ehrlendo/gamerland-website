@@ -69,6 +69,7 @@ body {
     left: 50%;
     transform: translate(-50%,-50%);
 }
+/*
 #top .title p:first-of-type {
     margin: auto;
     color: white;
@@ -92,13 +93,13 @@ body {
     bottom: -0.2rem;
     left: 0;
     background-color: white;
-}
+}*/
 
-#top .title p:not(:first-of-type) {
+#top .title p {
     color: white;
-    text-transform: uppercase;
+    text-transform: lowercase;
     font-family: 'PT Sans', sans-serif;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.05em;
     font-size: 2rem;
     font-weight: bold;
     text-align: center;
@@ -125,17 +126,36 @@ body {
 #top > .content > .body {
     width: 100%;
     text-align: center;
-    margin: 0;
-    margin-top: 1rem;
+    margin: auto;
+    width: fit-content;
 }
 
-#top > .content > .body p {
-    margin: 0;
-    color: rgb(220,220,220);
-    font-family: 'PT Sans', sans-serif;
-    text-transform: uppercase;
-    font-size: 0.8rem;
+#top > .content > .body ul {
+    width: fit-content;
+    margin: auto;
+    padding: 0;
+}
 
+
+#top > .content > .body ul li:before { 
+    content:'•'; margin-right:0.3em; 
+    border-radius: 100%;
+    overflow: hidden;
+    font-size: 1rem;
+    color: white;
+}
+#top > .content > .body ul li {
+    display: inline-block;
+    margin-right: 1rem;
+    opacity: 0.6;
+}
+
+#top > .content > .body ul li.online {
+    color: #8BE273;
+}
+
+#top > .content > .body ul li.offline {
+    color: red;
 }
 
 #header {
@@ -847,6 +867,7 @@ body.mobile #white-box > .wrapper > .action-buttons-wrapper > .action-button {
     overflow-x: hidden;
     padding: 2rem !important;
     box-sizing: border-box;
+    color: white;
 }
 
 .user-list .user-entry {
@@ -927,6 +948,13 @@ body.mobile #white-box > .wrapper > .action-buttons-wrapper > .action-button {
 .fp-modal .page-buttons button:not(:first-of-type) {
     margin-left: 1rem;
 }
+.fp-modal .page-buttons button {
+    transition: none;
+}
+
+.fp-modal .page-buttons button:hover {
+    transform: none !important;
+}
 
 .fp-modal .server-console {
     height: 100%;
@@ -971,6 +999,13 @@ body.mobile #white-box > .wrapper > .action-buttons-wrapper > .action-button {
 
 .fp-modal .server-console .console-body .input-form input {
     width: calc(100% - 1rem - 7rem);
+    border-radius: 1rem;
+    outline: none;
+    padding: 0 0.5rem;
+    box-sizing: border-box;
+    border-color: var(--color-two);
+    border-style: solid;
+    height: 1.5rem;
 }
 
 .fp-modal .server-console .console-body .input-form button:hover {
@@ -980,4 +1015,59 @@ body.mobile #white-box > .wrapper > .action-buttons-wrapper > .action-button {
 .fp-modal .server-console .console-body .input-form button {
     margin-left: 1rem;
     width: 7rem;
+}
+
+body > div.fp-modal > div.server-console > div > div.server-feedback {
+    padding: 1rem;
+    box-sizing: border-box;
+    position: relative;
+}
+
+body > div.fp-modal > div.server-console > div > div.server-feedback .console-message {
+    height: 1.5rem;
+    line-height: 1.5rem;
+}
+
+body > div.fp-modal > div.server-console > div > div.server-feedback > button {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 100%;
+    text-align: center;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+}
+
+body > div.fp-modal > div.server-console > div > div.server-feedback > button i {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    height: fit-content;
+}
+
+body > div.fp-modal > div.server-console > div > div.server-feedback > button:focus::before {
+    position: absolute;
+    top: -0.5rem;
+    left: 0;
+    background-color: var(--color-two);
+    height: fit-content;
+    width: 20rem;
+    border-radius: 1rem;
+    min-height: 1rem;
+    transform: translate(0,-100%);
+    content: "The server chat will not show up in this console output window. If any errors occur, or there is some output returned from your query, it will be shown in this field.";
+    color: white;
+    animation: fade-in 200ms ease-in-out;
+    padding: 1rem;
+    box-sizing: border-box;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.12), 
+    0 2px 2px rgba(0,0,0,0.12), 
+    0 4px 4px rgba(0,0,0,0.12), 
+    0 8px 8px rgba(0,0,0,0.12),
+    0 16px 16px rgba(0,0,0,0.12);
 }

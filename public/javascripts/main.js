@@ -211,7 +211,7 @@ window.onload = function() {
         if(this.status == 200 && this.readyState == 4) {
             var res = JSON.parse(this.responseText);
             updateServerStatus(res);
-
+            console.log(res)
 
 
         } else if(this.status != 200 && this.readyState == 4) {
@@ -230,109 +230,310 @@ window.onload = function() {
 
 }
 
-function showServConsole(e) {
-    var el = e.target;
-    var buttons = el.closest(".page-buttons").children;
-    
-    var x;
-    for(x of buttons) {
-        x.classList.remove("outline");
-        x.classList.remove("smooth-shadow");
-        x.classList.add("white");
-    }
-
-    el.classList.add("outline");
-    el.classList.add("smooth-shadow");
-    el.classList.remove("white");
 
 
-    var modal = document.body.querySelector(".fp-modal");
-    if(modal.querySelector(".user-list")) {
-        modal.querySelector(".user-list").style.display = "none";
-    }
-
-    var createConsole = ()=>{
-        var cons = document.createElement("div");
-        cons.className = "server-console";
-        modal.appendChild(cons);
-
-        var title = document.createElement("h1");
-        title.innerHTML = "Gamerland 5 Server Console";
-        cons.appendChild(title);
-    
-        var body = document.createElement("div");
-        body.className = "console-body smooth-shadow"
-        cons.appendChild(body)
 
 
-        var feedB = document.createElement("div");
-        feedB.className = "server-feedback";
-        body.appendChild(feedB);
+function adminModal() {
+    var socket;
+    function handleUserAction(e) {
 
-        var inpB = document.createElement("form");
-        inpB.className = "input-form";
-        body.appendChild(inpB);
+        var el = e.target.closest(".button");
 
-        var field = document.createElement("input");
-        inpB.appendChild(field);
-
-        var sendServCommand = (e)=>{
-            e.preventDefault();
-            var command = e.target.previousElementSibling.value.trim();
-            if(command.length == 0) return;
-            e.target.innerHTML = "Sending";
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "/consoleCommand");
-    
-            var form = new FormData();
-            form.append("command", command);
-    
-            xhr.send(form);
-    
-            xhr.onreadystatechange = function() {
-                if(this.readyState == 4 && this.status == 200) {
-                    //OK
-                    e.target.innerHTML = "Submit";
-                } else {
-                    e.target.innerHTML = "error";
-                    console.log(this.status);
-                }
+        if(el.innerHTML.toLowerCase() != "accept" && el.innerHTML.toLowerCase() != "reject") {
+            //Reset the button
+            el.style.height = "2rem";
+            el.closest(".user-entry").classList.remove("rejected");
+            el.closest(".user-entry").classList.remove("accepted");
+            if(el.classList.contains("accept")) {
+                el.innerHTML = "Accept";
+                return;
+            } else {
+                el.innerHTML = "Reject";
+                return;
             }
         }
 
-        var subm = document.createElement("button");
-        subm.className = "button fd-design";
-        inpB.appendChild(subm);
-        subm.innerHTML = "SUBMIT";
-        subm.addEventListener("click", sendServCommand);
+        var action = el.innerHTML.toLowerCase().trim()=='accept' ? true : false;
+        //If true: accept user, otherwise reject
+        if(action) {
+            //Reset the reject button
+            el.nextElementSibling.innerHTML = "Reject";
+            el.nextElementSibling.style.height = "2rem";
+
+            el.closest(".user-entry").classList.add("accepted");
+            el.closest(".user-entry").classList.remove("rejected");
+
+        } else if(action == false) {
+            el.previousElementSibling.innerHTML = "Accept";
+            el.previousElementSibling.style.height = "2rem";
+
+            
+            el.closest(".user-entry").classList.add("rejected");
+            el.closest(".user-entry").classList.remove("accepted");
+        }
+
+        var ico = document.createElement("i");
+        ico.style.animation = "slide-in-bottom 200ms ease-in-out";
+        ico.innerHTML = "check";
+        ico.className = "material-icons";
+        el.innerHTML = "";
+        el.appendChild(ico);
+        el.style.height = "2.8rem";
+
     }
 
-    if(!modal.querySelector(".server-console")) {
-        createConsole();
+    var populateList = function(listData) {
+        if(listData.length < 1) return;
+        var x;
+        for(x of listData) {
+
+            var el = document.createElement("div");
+            el.className = "user-entry";
+            
+            var tWr = document.createElement("div");
+            tWr.className = "text-wrapper";
+
+            var title = document.createElement("p");
+            title.innerHTML = x.username;
+            title.className = "mcusrname"
+
+            var dc = document.createElement("p");
+            dc.innerHTML = x.dcname;
+            dc.className = "dcusrname"
+
+            var id = document.createElement("p");
+            id.innerHTML = x.id;
+            id.className = "id"
+
+            var wr = document.createElement("div");
+            wr.className = "buttons-wrapper";
+
+            var acc = document.createElement("button");
+            acc.innerHTML = "Accept"
+            acc.className = "button fd-design smooth-shadow white accept";
+            acc.addEventListener("click", handleUserAction)
+
+
+            var rej = document.createElement("button");
+            rej.innerHTML = "Reject";
+            rej.className = "button fd-design outline reject";
+            rej.addEventListener("click", handleUserAction)
+
+
+            tWr.appendChild(title);
+            tWr.appendChild(dc);
+            tWr.appendChild(id);
+
+            el.appendChild(tWr);
+            el.appendChild(wr);
+
+            wr.appendChild(acc);
+            wr.appendChild(rej);
+
+            modal.querySelector(".user-list").appendChild(el);
+            
+        }
     }
+    function showServConsole(e) {
+        socket = io();
+
+        var handleCommandReturn = (message) => {
+            if(!document.body.querySelector(".fp-modal > .server-console")) return;
+            var el = document.createElement("div");
+            el.className = "console-message";
+            var par = document.body.querySelector(".fp-modal > .server-console > .console-body > .server-feedback");
+            par.appendChild(el);
+            el.innerHTML = message;
+            document.querySelector("body > div.fp-modal > div.server-console > div > form > button").innerHTML = "Submit"
+        }
+
+        socket.on("minecraft-server-console",handleCommandReturn);
 
 
-
-
-}
-
-function showApplicantList(e) {
-    var el = e.target;
-    var buttons = el.closest(".page-buttons").children;
+        var el = e.target;
+        var buttons = el.closest(".page-buttons").children;
+        
+        var x;
+        for(x of buttons) {
+            x.classList.remove("outline");
+            x.classList.remove("smooth-shadow");
+            x.classList.add("white");
+        }
     
-    var x;
-    for(x of buttons) {
-        x.classList.remove("outline");
-        x.classList.remove("smooth-shadow");
-        x.classList.add("white");
+        el.classList.add("outline");
+        el.classList.add("smooth-shadow");
+        el.classList.remove("white");
+    
+    
+        var modal = document.body.querySelector(".fp-modal");
+        if(modal.querySelector(".user-list")) {
+            modal.querySelector(".user-list").style.display = "none";
+        }
+    
+        var createConsole = ()=>{
+            //Get the pass
+            var pass = localStorage.getItem("pass");
+
+            var cons = document.createElement("div");
+            cons.className = "server-console";
+            modal.appendChild(cons);
+
+            var title = document.createElement("h1");
+            title.innerHTML = "Gamerland 5 Server Console";
+            cons.appendChild(title);
+            
+            var body = document.createElement("div");
+            body.className = "console-body smooth-shadow"
+            cons.appendChild(body)
+        
+        
+            var feedB = document.createElement("div");
+            feedB.className = "server-feedback";
+            body.appendChild(feedB);
+        
+            var infoButt = document.createElement("button");
+            infoButt.className = "smooth-shadow"
+            var ico = document.createElement("i");
+            ico.className = "material-icons";
+            ico.innerHTML = "info";
+            infoButt.appendChild(ico);
+            feedB.appendChild(infoButt);
+
+            var inpB = document.createElement("form");
+            inpB.className = "input-form";
+            body.appendChild(inpB);
+        
+            var field = document.createElement("input");
+            inpB.appendChild(field);
+
+            var subm = document.createElement("button");
+            subm.className = "button fd-design";
+            inpB.appendChild(subm);
+            subm.innerHTML = "SUBMIT";
+            
+            var sendServCommand = (e)=>{
+                e.preventDefault();
+                var command = e.target.previousElementSibling.value.trim();
+                e.target.previousElementSibling.value = ""; //Reset the text field, because du'uh
+                if(command.length == 0) return;
+                e.target.innerHTML = "Sending";
+
+                socket.emit("minecraft-server-console", {key: pass,command:command});
+
+/*
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "/consoleCommand");
+                
+                var form = new FormData();
+                form.append("command", command);
+                
+                xhr.send(form);
+                
+                xhr.onreadystatechange = function() {
+                    if(this.readyState == 4 && this.status == 200) {
+                        //OK
+                        e.target.innerHTML = "Submit";
+                    } else {
+                        e.target.innerHTML = "error";
+                        console.log(this.status);
+                    }
+                }*/
+            }
+            
+            subm.addEventListener("click", sendServCommand);
+
+        }
+    
+        if(!modal.querySelector(".server-console")) {
+            createConsole();
+        } else {
+            modal.querySelector(".server-console").style.display = "grid";
+        }
+    
+    
+    
+    
     }
     
-    el.classList.add("outline");
-    el.classList.add("smooth-shadow");
-    el.classList.remove("white");
-}
+    function showApplicantList(e) {
+        socket.off("minecraft-server-console");
+        var el = e.target;
+        var buttons = el.closest(".page-buttons").children;
+        console.log(buttons);
+        var x;
+        for(x of buttons) {
+            x.classList.remove("outline");
+            x.classList.remove("smooth-shadow");
+            x.classList.add("white");
+        }
+        
+        el.classList.add("outline");
+        el.classList.add("smooth-shadow");
+        el.classList.remove("white");
+    
+        var modal = document.body.querySelector(".fp-modal");
+        if(modal.querySelector(".server-console")) {
+            modal.querySelector(".server-console").style.display = "none";
+        }
+    
+        createApplicantList();
+    
+    }
 
-function adminModal() {
+
+    var createApplicantList = ()=>{
+
+        var list;
+
+        if(!modal.querySelector(".user-list")) {
+            list = document.createElement("div");
+            list.className = "user-list";
+            modal.appendChild(list);
+        } else {
+            list = modal.querySelector(".user-list");
+        }
+
+        list.style.display = "block";
+
+        //Fetch the user list
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/applyList");
+        xhr.send();
+        xhr.onreadystatechange = function() {
+            if(this.readyState == 4 && this.status == 200) {
+                //OK
+                //Populate the list
+                var listData = JSON.parse(this.responseText);
+
+                var acceptChanges = document.createElement("button");
+                acceptChanges.className = "button fd-design white smooth-shadow";
+                acceptChanges.innerHTML = "Apply";
+                acceptChanges.style = `
+                    position: absolute;
+                    bottom: 1rem;
+                    right: 1rem;
+                `;
+
+                acceptChanges.addEventListener("click", submitUserChanges);
+
+                modal.appendChild(acceptChanges);
+
+                populateList(listData);
+
+            } else if(this.readyState == 4 && this.status != 200) {
+                //ERROR
+                //Yes
+                if(this.status == 204) {
+                    //No content
+                    modal.querySelector(".user-list").innerHTML = "No users have applied, or all applications have been processed";
+                }
+            }
+        }
+    }
+
+
     var modal;
     if(!document.body.querySelector(".fp-modal")) {
         var modal = showModal();
@@ -366,6 +567,8 @@ function adminModal() {
         xhr.onreadystatechange = function() {
             if(this.status == 200 && this.readyState == 4) {
                 //User authenticated! Great!
+                //save the password in localstorage
+
                 p.parentNode.removeChild(p);
                 showAdminPage(modal);
             } else if(this.status != 200 && this.readyState == 4) {
@@ -432,12 +635,13 @@ function adminModal() {
             
             var formData = new FormData();
             formData.append("password", inp.value);
-
+            var pass = inp.value;
             xhr.send(formData);
 
             xhr.onreadystatechange = function() {
                 if(this.readyState == 4 && this.status == 200) {
                     //Successful
+                    localStorage.setItem("pass", pass);
                     e.target.style.transition = "all 150ms ease-in-out";
                     e.target.style.width = "13rem";
                     e.target.style.color = "rgba(255,255,255,0)";
@@ -465,6 +669,8 @@ function adminModal() {
     var showAdminPage = (modal)=>{
         modal.innerHTML = "";
 
+        createApplicantList();
+
         //Create the page buttons
         var buttonsCont = document.createElement("div");
         buttonsCont.className = "page-buttons";
@@ -476,151 +682,15 @@ function adminModal() {
         buttonsCont.appendChild(console);
         console.addEventListener("click", showServConsole);
 
+
         var apL = document.createElement("button");
         apL.className = "button fd-design outline smooth-shadow";
         apL.innerHTML = "Application list";
         buttonsCont.appendChild(apL);        
         apL.addEventListener("click", showApplicantList);
 
-        var list = document.createElement("div");
-        list.className = "user-list";
-        modal.appendChild(list);
 
 
-        //Fetch the user list
-
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "/applyList");
-        xhr.send();
-        xhr.onreadystatechange = function() {
-            if(this.readyState == 4 && this.status == 200) {
-                //OK
-                //Populate the list
-                var listData = JSON.parse(this.responseText);
-
-                var acceptChanges = document.createElement("button");
-                acceptChanges.className = "button fd-design white smooth-shadow";
-                acceptChanges.innerHTML = "Apply";
-                acceptChanges.style = `
-                    position: absolute;
-                    bottom: 1rem;
-                    right: 1rem;
-                `;
-
-                acceptChanges.addEventListener("click", submitUserChanges);
-
-                modal.appendChild(acceptChanges);
-
-                populateList(listData);
-
-            } else if(this.readyState == 4 && this.status != 200) {
-                //ERROR
-                console.log(this.responseText)
-                if(this.status == 204) {
-                    //No content
-                    modal.innerHTML = "No users have applied, or all applications have been processed";
-                }
-            }
-        }
-
-        function handleUserAction(e) {
-
-            var el = e.target.closest(".button");
-
-            if(el.innerHTML.toLowerCase() != "accept" && el.innerHTML.toLowerCase() != "reject") {
-                //Reset the button
-                el.style.height = "2rem";
-                el.closest(".user-entry").classList.remove("rejected");
-                el.closest(".user-entry").classList.remove("accepted");
-                if(el.classList.contains("accept")) {
-                    el.innerHTML = "Accept";
-                    return;
-                } else {
-                    el.innerHTML = "Reject";
-                    return;
-                }
-            }
-
-            var action = el.innerHTML.toLowerCase().trim()=='accept' ? true : false;
-            //If true: accept user, otherwise reject
-            if(action) {
-                //Reset the reject button
-                el.nextElementSibling.innerHTML = "Reject";
-                el.nextElementSibling.style.height = "2rem";
-
-                el.closest(".user-entry").classList.add("accepted");
-                el.closest(".user-entry").classList.remove("rejected");
-
-            } else if(action == false) {
-                el.previousElementSibling.innerHTML = "Accept";
-                el.previousElementSibling.style.height = "2rem";
-
-                
-                el.closest(".user-entry").classList.add("rejected");
-                el.closest(".user-entry").classList.remove("accepted");
-            }
-
-            var ico = document.createElement("i");
-            ico.style.animation = "slide-in-bottom 200ms ease-in-out";
-            ico.innerHTML = "check";
-            ico.className = "material-icons";
-            el.innerHTML = "";
-            el.appendChild(ico);
-            el.style.height = "2.8rem";
-
-        }
-
-        var populateList = function(listData) {
-            if(listData.length < 1) return;
-            var x;
-            for(x of listData) {
-
-                var el = document.createElement("div");
-                el.className = "user-entry";
-                
-                var tWr = document.createElement("div");
-                tWr.className = "text-wrapper";
-
-                var title = document.createElement("p");
-                title.innerHTML = x.username;
-                title.className = "mcusrname"
-
-                var dc = document.createElement("p");
-                dc.innerHTML = x.dcname;
-                dc.className = "dcusrname"
-
-                var id = document.createElement("p");
-                id.innerHTML = x.id;
-                id.className = "id"
-
-                var wr = document.createElement("div");
-                wr.className = "buttons-wrapper";
-
-                var acc = document.createElement("button");
-                acc.innerHTML = "Accept"
-                acc.className = "button fd-design smooth-shadow white accept";
-                acc.addEventListener("click", handleUserAction)
-
-
-                var rej = document.createElement("button");
-                rej.innerHTML = "Reject";
-                rej.className = "button fd-design outline reject";
-                rej.addEventListener("click", handleUserAction)
-
-
-                tWr.appendChild(title);
-                tWr.appendChild(dc);
-                tWr.appendChild(id);
-
-                el.appendChild(tWr);
-                el.appendChild(wr);
-
-                wr.appendChild(acc);
-                wr.appendChild(rej);
-
-                list.appendChild(el);
-            }
-        }
     }
 
 
@@ -686,7 +756,7 @@ function adminModal() {
                 for(y of rej) {
                     y.style.animation = "fade-out 200ms ease-in-out both";
                     setTimeout(()=>{
-                        x.parentNode.removeChild(y);
+                        y.parentNode.removeChild(y);
                     }, 200);
                 }
 
@@ -707,15 +777,15 @@ function adminModal() {
 }
 
 
-var hideArray = [".login-box:not(.mobile)", ".register-box"];
 function enableClickListener() {
+    var hideArray = [".login-box:not(.mobile)", ".register-box"];
     document.addEventListener("click", function(e) {
         var target = e.target;
 
         
         //Hide the elements to hide
         var x;
-        for(x of hideArray) {
+        for(x of hideArray) {   
             var el = document.querySelector(x);
             if(el instanceof HTMLElement) {   
                 if(!el.contains(target)) {
@@ -727,6 +797,7 @@ function enableClickListener() {
         }
     })
 }
+
 
 
 function signInClient(e) {
@@ -783,30 +854,27 @@ function registerUser(e) {
 
 
 function updateServerStatus(data) {
-    return;
-    console.log(data)
-    var online = data.onlinePlayers;
-    var host = data.host;
-    if(host) {
-        var el = document.getElementsByClassName("server-online")[0];
-        el.innerHTML = "Serveren er på";
-    } else {
-        var el = document.getElementsByClassName("server-online")[0];
-        el.innerHTML = "Serveren er av";
-    }
+    var par = document.querySelector("#top > div > div.body > ul");
+    
+    var online = data?true:false;
+    if(!data) {
+        //Set the status
+        par.querySelector(".is-online").innerHTML = "offline";
+        par.querySelector(".is-online").classList.add("offline");
+        par.querySelector(".is-online").classList.remove("online");
+        return;
+    };
+    var ping = data.roundTripLatency;  
+    var players = data.onlinePlayers;
 
-    if(online == null) {
-        var el = document.getElementsByClassName("players-online")[0];
-        el.innerHTML = "Kunne ikke laste inn"
-    } else {
-        
-        var el = document.getElementsByClassName("players-online")[0];
-        var player = "Spiller";
-        if(online > 1 || online == 0) {
-            player = "Spillere";
-        } 
-        el.innerHTML = online + " " + player + " online";
-    }
+    par.querySelector(".is-online").innerHTML = "online";
+    par.querySelector(".is-online").classList.add("online");
+    par.querySelector(".is-online").classList.remove("offline");
+
+    par.querySelector(".ping").innerHTML = ping + "ms";
+
+    var plural = players==1?"spiller":"spillere";
+    par.querySelector(".players").innerHTML = players + " " + plural + " på";    
 }
 
 function closeRegisterBox(el) {

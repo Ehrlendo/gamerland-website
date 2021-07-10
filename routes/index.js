@@ -5,6 +5,8 @@ const mysql = require("mysql");
 const useragent = require("express-useragent");
 const { Pool, Client } = require("pg");
 const session = require("express-session");
+
+
 var pool;
 if(process.env.DEVELOPMENT) {
   console.log("iojubasjbdbiasdibja")
@@ -13,7 +15,8 @@ if(process.env.DEVELOPMENT) {
     host: 'localhost',
     user: process.env.LUSR,
     password: process.env.LPASS,
-    database: process.env.LDB
+    database: process.env.LDB,
+    port: process.env.LPORT
   })
 } else {
 
@@ -29,6 +32,8 @@ pool.on("error", (err, client) => {
   console.log("Unexpected error ", err);
   process.exit(-1);
 })
+
+
 
 const escapeHTML = str =>
   str.replace(
@@ -77,17 +82,20 @@ router.post("/register", function(req, res) {
 })
 console.log(process.env.SERVERPASS);
 const client = new util.RCON('88.88.177.131', {port:25575,enableSRV:true,timeout:50,password:process.env.SERVERPASS});
-
+var io;
+setTimeout(()=>{
+  io = require("../bin/www").io;
+  console.log(io);
+}, 1000)
 client.on('output', (message) => {
-  console.log(message);
-
+  io.emit("minecraft-server-console", message);
   client.close();
 })
 
 
 function runConsoleCommand(command) {
   return new Promise((resolve, reject) => {
-
+    if(command.trim().length == 0) reject("No command!");
     client.connect()
     .then(()=>{client.run(command); resolve();})
     .catch((error)=>{
@@ -96,6 +104,10 @@ function runConsoleCommand(command) {
     })
   })
 }
+setTimeout(()=>{
+
+  module.exports.runCommand = runConsoleCommand;
+}, 1000);
 
 router.post("/consoleCommand", async function(req, res) {
   if(!req.session.adminAuthed) {res.status(503).send({message:"not authorized!"})}
@@ -213,6 +225,33 @@ router.get("/applyList", function(req, res) {
 })
 
 
+function authCommand(key) {
+  return new Promise((resolve,reject) => {
+    pool.connect((err, client, done) => {
+      if (err) throw err;
+      client.query("SELECT adminpassword=crypt($1, adminpassword) AND eier=$2 FROM passwords;",[key,'erlend'], (err, resu) => {
+        done()
+        if (err) {
+          console.log(err.stack)
+          reject(err);
+        } else {
+          if(resu.rows[0]['?column?'] == true) {
+            resolve();
+          } else {
+            console.log("WRONG ADMIN CREDENTIALS")
+            reject("Not ok");
+          }
+        }
+      })
+    })
+  })
+}
+setTimeout(()=>{
+
+  module.exports.authCommand = authCommand;
+}, 1000)
+  
+
 
 router.post("/adminAuth", function(req, res) {
   if(req.session.adminAuthed) {
@@ -263,7 +302,7 @@ router.get('/map', function(req, res, next) {
 router.get('/voicechat', function(req, res, next) {
   res.render('./tutorials/voicechat');
 });
-/*
+
 router.get("/mc/server/status", async function(req,res) {
   updateServerData()
   .then(response=>{
@@ -272,7 +311,7 @@ router.get("/mc/server/status", async function(req,res) {
   .catch(error=>{
     res.status(500).send(error);
   })
-})*/
+})
 
 
 function updateServerData(){
