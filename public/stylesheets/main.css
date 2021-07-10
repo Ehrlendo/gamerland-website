@@ -149,6 +149,8 @@ body {
     display: inline-block;
     margin-right: 1rem;
     opacity: 0.6;
+    color: white;
+    transition: all 5000ms ease-in-out;
 }
 
 #top > .content > .body ul li.online {
