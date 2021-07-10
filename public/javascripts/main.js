@@ -871,7 +871,7 @@ function updateServerStatus(data) {
     par.querySelector(".is-online").classList.add("online");
     par.querySelector(".is-online").classList.remove("offline");
 
-    par.querySelector(".ping").innerHTML = ping + "ms";
+    //par.querySelector(".ping").innerHTML = ping + "ms";
 
     var plural = players==1?"spiller":"spillere";
     par.querySelector(".players").innerHTML = players + " " + plural + " på";    

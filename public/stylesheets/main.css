@@ -134,6 +134,7 @@ body {
     width: fit-content;
     margin: auto;
     padding: 0;
+    margin-left: 0.3rem;
 }
 
 
@@ -151,11 +152,15 @@ body {
 }
 
 #top > .content > .body ul li.online {
-    color: #8BE273;
+    color: #9CF97F;
 }
 
 #top > .content > .body ul li.offline {
     color: red;
+}
+
+#top > .content > .body ul li.ping:hover::after {
+    content: "Pingen er beregnet"
 }
 
 #header {
