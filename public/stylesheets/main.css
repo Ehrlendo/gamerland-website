@@ -618,10 +618,10 @@ body.mobile #white-box {
 
 #white-box > .image-display {
     position: absolute;
-    bottom: 5%;
+    top: 2.5rem;
     right: 2rem;
     border-radius: 1rem;
-    height: 50%;
+    height: 70%;
     overflow: hidden;    
     z-index: 0;
     transition: opacity 200ms ease-in-out;
