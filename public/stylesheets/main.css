@@ -676,6 +676,7 @@ body.mobile #white-box > .wrapper {
     display: flex;
     align-items: center;
     transition: all 100ms ease-in-out;
+    user-select: none;
 
 }
 
@@ -716,8 +717,8 @@ body.mobile #white-box > .wrapper > .action-buttons-wrapper > .action-button {
 #white-box > .wrapper .connector-ribbon {
     height: 100%;
     width: 100%;
-    background-color: #d3d3d3;
-    background: linear-gradient(0deg, rgba(211,211,211,1) 0%, rgba(211,211,211,1) 96%, rgba(255,255,255,1) 100%);
+    background-color: #CEDBE2;
+    
     animation: slide-ribbon-left 100ms ease-in-out;
     float: right;
 }
@@ -772,7 +773,6 @@ body.mobile #white-box > .wrapper > .action-buttons-wrapper > .action-button {
     box-sizing: border-box;
     animation: fade-in 100ms ease-in-out 400ms both;
     border-radius: 1rem;
-    overflow: hidden;
 }
 
 #white-box > .wrapper > .card-content-wrapper .box iframe.fade-in {

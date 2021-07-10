@@ -299,8 +299,8 @@ router.get('/map', function(req, res, next) {
   res.render('./tutorials/map');
 });
 
-router.get('/voicechat', function(req, res, next) {
-  res.render('./tutorials/voicechat');
+router.get('/datapacks', function(req, res, next) {
+  res.render('./tutorials/datapacks');
 });
 
 router.get("/mc/server/status", async function(req,res) {

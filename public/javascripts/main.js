@@ -956,7 +956,7 @@ function showBoxContents(type) {
         box.style.borderRadius = "1rem";
     }
 
-    var sources = ["curseforge", "mods", "map", "voicechat"]
+    var sources = ["curseforge", "mods", "map", "datapacks"]
     iframe.src="/" + sources[type];
 
 

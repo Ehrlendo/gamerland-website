@@ -1,9 +1,35 @@
 <!DOCTYPE html>
 <head>
     <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/cfg.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/iframe.css" />
 </head>
 <body>
-    <h1 class="white">Her pågår det byggingsarbeid...</h1>
-    <p>Det kan hende det er mer å se om en liten stund!</p>
+    <iframe src="http://88.88.177.131:8100" style="height: calc(100% - 1rem) !important; width: calc(100% - 1rem) !important; position: absolute; border: none; box-shadow: none;"></iframe>
+    <button class="button fd-design smooth-shadow" style="position: absolute; bottom: 1rem; left: 1rem;">Hjelp</button>
+    <script>
+        function showImage(e) {
+            var modal = document.createElement("div");
+            modal.className = "modal";
+            document.body.appendChild(modal);
+
+            var img = document.createElement("img");
+            img.src = e.target.src;
+            modal.appendChild(img);
+
+            modal.addEventListener("click", (e)=>{
+                e.target.closest(".modal").parentNode.removeChild(e.target.closest(".modal"));
+            })
+        }
+
+        window.onload = function() {
+            //Get all image elements, allow fullscreen viewing
+            var imgs = document.body.getElementsByTagName("img");
+
+            var x;
+            for(x of imgs) {
+                x.addEventListener("click", showImage);
+            }
+        }
+    </script>
 </body>
 </html>

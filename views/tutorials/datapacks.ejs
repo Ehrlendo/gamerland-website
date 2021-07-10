@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/cfg.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/iframe.css" />
+</head>
+<body>
+    <h1>Datapacks</h1>
+    <h2>Vi har noen datapacks på serveren, her er en liste med korte forklaringer til hver:</h2>
+    
+    <h3>Cauldron concrete</h3>
+    <p1>Slipp concrete powder i en cauldron med vann for å lage concrete</p1>
+    
+    <h3>Chunk loaders</h3>
+    <p1>Slipp en nether star på toppen av en lodestone for å lage en chunk loader, den loader kun 1 chunk.</p1>
+    
+    <h3>Armor statues</h3>
+    <p1>
+    Bruk en spesiell bok for å kunne posere armor stands
+    For å få tak i boka må man ha en Book and quill, og signere den med "Statues" 
+    <a href="https://www.youtube.com/watch?v=nV9-_RacnoI&ab_channel=ZombieCleo">video</a>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/nV9-_RacnoI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </p1>
+    
+    <h3>More mob heads</h3>
+    <p1>Alle mobs har en liten sjanse til å droppe et hode når de dør</p1>
+    
+    <h3>Player head drops</h3>
+    <p1>Når en spiller dør dropper de hodet sitt</p1>
+    
+    <h3>Nether portal coords</h3>
+    <p1>
+    Skriv inn en kommando som regner ut hvor en portal må plasseres i overworld i forhold til nether
+    Hvis du står i Overworld skriver du: "/trigger nc_inNether" 
+    Hvis du står i Nether skriver du: "/trigger nc_inOverworld"
+    <a href="https://www.youtube.com/watch?v=_rRR-CBq1yM&ab_channel=xisumatwo">video</a>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/_rRR-CBq1yM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </p1>
+    
+    <h3>Afk display</h3>
+    <p1>Gjør en spillers navn grått hvis den er inaktiv på serveren i over 5 minutter</p1>
+    
+    <h3>Durability ping</h3>
+    <p1>Hvis våpen/verktøy når 10% durability får du en liten advarsel, dette kan lett tweakes ved å skrive "/trigger duraPing" i chatten</p1>
+    <script>
+        function showImage(e) {
+            var modal = document.createElement("div");
+            modal.className = "modal";
+            document.body.appendChild(modal);
+
+            var img = document.createElement("img");
+            img.src = e.target.src;
+            modal.appendChild(img);
+
+            modal.addEventListener("click", (e)=>{
+                e.target.closest(".modal").parentNode.removeChild(e.target.closest(".modal"));
+            })
+        }
+
+        window.onload = function() {
+            //Get all image elements, allow fullscreen viewing
+            var imgs = document.body.getElementsByTagName("img");
+
+            var x;
+            for(x of imgs) {
+                x.addEventListener("click", showImage);
+            }
+        }
+    </script>
+</body>
+
+</html>
