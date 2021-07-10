@@ -907,6 +907,9 @@ function showCardContents(el) {
 }
 
 function showBoxContents(type) {
+    if(!document.querySelector("#white-box > button").classList.contains("content-shown")) {
+        document.querySelector("#white-box > button").classList.add("content-shown");
+    }
     var wr = document.querySelector("#white-box > div.wrapper > div.card-content-wrapper");
     if(!wr.querySelector(".box")) {
         //There is no beautiful box, create one
@@ -1005,4 +1008,15 @@ function showModal() {
     }
 
     return modal;
+}
+
+function toggleFastenButton(el) {
+    el.classList.toggle("fastened");
+    if(el.classList.contains("fastened")) {
+        el.children[0].innerHTML = "lock";
+        el.children[1].innerHTML = "Løsne fanen";
+    } else {
+        el.children[0].innerHTML = "lock_open";
+        el.children[1].innerHTML = "Fest fanen";
+    }
 }

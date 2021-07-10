@@ -212,6 +212,10 @@ body {
   color: white;
 }
 
+.button.fd-design * {
+  color: white;
+}
+
 .button.fd-design:disabled {
   opacity: 0.5;
   pointer-events: none;

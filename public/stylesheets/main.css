@@ -601,20 +601,20 @@ body.mobile #white-box {
     color: #a9bcc6;
 }
 
-#white-box:hover > *:not(.arrow-indicator) {
+#white-box:hover > *:not(.arrow-indicator), #white-box.show > *:not(.arrow-indicator) {
     opacity: 1;
 }
-#white-box:hover > .arrow-indicator {
+#white-box:hover > .arrow-indicator, #white-box.show > .arrow-indicator {
     border: 3px solid var(--color-two);
     content: "ned";
     box-shadow: none !important;
 }
 
-#white-box:hover > .arrow-indicator i {
+#white-box:hover > .arrow-indicator i, #white-box.show > .arrow-indicator i {
     transform: rotate(180deg);
     color: var(--color-two);
 }
-#white-box:hover {
+#white-box:hover, #white-box.show {
     bottom: 0;
 }
 
@@ -636,6 +636,38 @@ body.mobile #white-box > .image-display {
 #white-box > .image-display img {
     height: 100%;
     width: auto;
+}
+
+#white-box > .fasten-white-box {
+    position: absolute;
+    bottom: 1rem;
+    width: 12rem;
+    text-align: center;
+    left: calc(50% - 6rem);
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    z-index: 2;
+    transition: all 200ms ease-in-out;
+    right: calc(50% - 6rem);
+}
+
+#white-box > .fasten-white-box.content-shown {
+    right: 30%;
+    bottom: 0.5rem;
+    left: auto;
+}
+
+#white-box > .fasten-white-box:hover {
+    transform: scale(1.1);
+}
+
+#white-box > .fasten-white-box:active {
+    transform: scale(0.9);
+}
+
+#white-box > .fasten-white-box > i {
+    margin-right:0.5rem;
 }
 
 #white-box > .wrapper {
