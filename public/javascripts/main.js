@@ -219,6 +219,7 @@ window.onload = function() {
 
         } else if(this.status != 200 && this.readyState == 4) {
             console.log(this.responseText);
+            updateServerStatus(res);
         }
     }
 
@@ -863,6 +864,7 @@ function updateServerStatus(data) {
     if(!data) {
         //Set the status
         par.querySelector(".is-online").innerHTML = "offline";
+        par.querySelector(".players").innerHTML = "N/A";
         par.querySelector(".is-online").classList.add("offline");
         par.querySelector(".is-online").classList.remove("online");
         return;
@@ -1055,6 +1057,7 @@ function countdownInit() {
     future.setFullYear(Tyear);
     future.setHours(Thr);
     future.setMinutes(Tmin);
+    future.setSeconds(0);
     //The time parameters matches
     var timer = document.body.querySelector("#countdown-timer");
     var ctdwn;
