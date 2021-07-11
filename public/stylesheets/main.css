@@ -344,7 +344,7 @@ body {
 #countdown-timer {
     position: absolute;
     width: 80vw;
-    transform: translate(-50%,-4rem);
+    transform: translate(-50%,calc(-100% - 1rem));
     left: 50%;
     perspective: 10rem;
 }
