@@ -1,3 +1,6 @@
+const countDownTo = "13/07/2021&18:00"; //Count down to this date and time
+
+
 const minWidthToTriggerMobile = 980;
 
 
@@ -1023,7 +1026,6 @@ function toggleFastenButton(el) {
 
 
 //COUNTDOWN TIMER CODE
-const countDownTo = "13/07/2021&18:00";
 function countdownInit() {
     //Check if the countdown is finished or not
     var date = new Date();
