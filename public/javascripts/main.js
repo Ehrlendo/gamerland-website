@@ -1087,7 +1087,36 @@ function countdownInit() {
             var seconds = Math.round(delta % 60);
 
 
-            ctdwn.innerHTML = days + " dager " + hours + " timer " + minutes + " minutter og " + seconds + " sekunder til åpning";
+            ctdwn.innerHTML = days + " dager " + hours + " timer " + minutes + " min og " + seconds + " sek til åpning";
+        } else if(future < date) {
+            var secAgo = (date - future)/1000;
+            console.log(secAgo);
+            if(secAgo < 172800) {
+                //Add the animation
+                animateTitle(ctdwn);
+                ctdwn.innerHTML = "Serveren er nå åpen! Registrer deg for å få tilgang"
+
+            } else {
+                //Two days have passed since opening
+                if(document.querySelector("#countdown-timer > p")) {
+                    var el = document.querySelector("#countdown-timer > p");
+                    el.parentNode.removeChild(el);
+                }
+            }
+            
         }
     }, 1000)
+}
+
+var transitionRunning = false;
+function animateTitle(el) {
+    if(el.style.animation != "animateLaunchTitle 1300ms cubic-bezier(0.07, 0.19, 0.15, 1.47) 100ms" && !transitionRunning) {
+        transitionRunning = true;
+        el.style.color = "white";
+        setTimeout(()=>{
+            el.style.animation = "none";
+            el.style.color = "var(--color-two)";
+            el.style.animation = "animateLaunchTitle 1300ms cubic-bezier(0.07, 0.19, 0.15, 1.47) 100ms";
+        }, 300);
+    }
 }
