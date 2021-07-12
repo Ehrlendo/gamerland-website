@@ -1,6 +1,39 @@
 body {
     animation:fade-in 200ms ease-in-out 0.2s both;
 }
+::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+  ::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #659dbd;
+    border: 0px none #ffffff;
+    border-radius: 50px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #659dbd;
+  }
+  ::-webkit-scrollbar-thumb:active {
+    background: #000000;
+  }
+  ::-webkit-scrollbar-track {
+    background: #ffffff;
+    border: 0px none #ffffff;
+    border-radius: 50px;
+  }
+  ::-webkit-scrollbar-track:hover {
+    background: #666666;
+  }
+  ::-webkit-scrollbar-track:active {
+    background: #333333;
+  }
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
 img {
     display: block;
     margin: 0.5rem 0 1.5rem;
