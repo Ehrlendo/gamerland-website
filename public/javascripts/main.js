@@ -1091,8 +1091,9 @@ function countdownInit() {
             // what's left is seconds
             var seconds = Math.round(delta % 60);
 
-
-            ctdwn.innerHTML = days + " dager " + hours + " timer " + minutes + " min og " + seconds + " sek til åpning";
+            var dString = days==1?"dag":"dager";
+            var hrString = hours==1?"time":"timer";
+            ctdwn.innerHTML = days + " " + dString + " " + hours + " " + hrString + " " + minutes + " min og " + seconds + " sek til åpning";
         } else if(future < date) {
             var secAgo = (date - future)/1000;
             console.log(secAgo);
