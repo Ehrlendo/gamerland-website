@@ -81,7 +81,7 @@ router.post("/register", function(req, res) {
   })
 })
 console.log(process.env.SERVERPASS);
-const client = new util.RCON('85.167.76.249', {port:25575,enableSRV:true,timeout:50,password:process.env.SERVERPASS});
+const client = new util.RCON('rcon.gamerland.no', {port:25575,enableSRV:true,timeout:50,password:process.env.SERVERPASS});
 var io;
 setTimeout(()=>{
   io = require("../bin/www").io;
