@@ -1130,7 +1130,7 @@ body > div.fp-modal > div.server-console > div > div.server-feedback > button i 
 body > div.fp-modal > div.server-console > div > div.server-feedback > button:focus::before {
     position: absolute;
     top: -0.5rem;
-    left: 0;
+    right: 0;
     background-color: var(--color-two);
     height: fit-content;
     width: 20rem;
