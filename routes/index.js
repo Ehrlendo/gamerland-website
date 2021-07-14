@@ -5,12 +5,10 @@ const mysql = require("mysql");
 const useragent = require("express-useragent");
 const { Pool, Client } = require("pg");
 const session = require("express-session");
-
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 var pool;
 if(process.env.DEVELOPMENT) {
-  console.log("iojubasjbdbiasdibja")
-
   pool = new Pool({
     host: 'localhost',
     user: process.env.LUSR,
@@ -66,7 +64,7 @@ router.post("/register", function(req, res) {
   var discname = escapeHTML(req.body.discord.trim());
 
   pool.connect((err, client, done) => {
-    if(err) throw err;
+    if(err) {console.error(err); res.status(500).send({message: "Database error"}); return;}
     client.query("INSERT INTO users (username,dcname) VALUES($1, $2);", [gamename, discname], (err, resu) => {
       done()
       if (err) {
@@ -83,7 +81,7 @@ router.post("/register", function(req, res) {
   })
 })
 console.log(process.env.SERVERPASS);
-const client = new util.RCON('88.88.177.131', {port:25575,enableSRV:true,timeout:50,password:process.env.SERVERPASS});
+const client = new util.RCON('mc.gamerland.no', {port:25575,enableSRV:true,timeout:50,password:process.env.SERVERPASS});
 var io;
 setTimeout(()=>{
   io = require("../bin/www").io;
@@ -123,8 +121,6 @@ router.post("/consoleCommand", async function(req, res) {
     res.status(500).send()
   })
 })
-
-
 
 
 router.post("/updateUserList", async function(req, res) {
