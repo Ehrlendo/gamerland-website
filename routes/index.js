@@ -14,7 +14,9 @@ if(process.env.DEVELOPMENT) {
     user: process.env.LUSR,
     password: process.env.LPASS,
     database: process.env.LDB,
-    port: process.env.LPORT
+    port: process.env.LPORT,
+    idleTimeoutMillis: 0,
+    connectionTimeoutMillis: 0
   })
 } else {
 
@@ -57,6 +59,8 @@ router.get('/', function(req, res, next) {
   }
   res.render('index', {warning: ''});
 });
+
+
 
 router.post("/register", function(req, res) {
   //Perform sanitation
@@ -142,7 +146,7 @@ router.post("/updateUserList", async function(req, res) {
     if(acceptedList) {
       for(x of acceptedList) {
         await sendAccepted(x);
-        runServerCommand(x.usrname);
+        await runServerCommand(x.usrname);
       }  
     }
 

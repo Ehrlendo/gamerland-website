@@ -18,18 +18,18 @@ body, html {
   }
 
 body {
-    color: white;
+    color: var(--primary-color);
     font-family: 'PT Sans', sans-serif;
 }
 
 .fp-modal {
     animation: fade-in 200ms ease-in-out;
     overflow: hidden;
-    color: black;
+    color: var(--primary-text-color);
 }
 
 .fp-modal > div > h1 {
-    color: black;
+    color: var(--primary-text-color);
     margin: 0 0 1rem 0;
 }
 
@@ -57,6 +57,9 @@ body {
     width: 100%;
     background: var(--color-two);
     position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('/images/backgroundLightTheme.png')
 }
 
 #top .title {
@@ -67,7 +70,7 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%,-10rem);
 }
 /*
 #top .title p:first-of-type {
@@ -96,7 +99,7 @@ body {
 }*/
 
 #top .title p {
-    color: white;
+    color: var(--primary-color);
     text-transform: lowercase;
     font-family: 'PT Sans', sans-serif;
     letter-spacing: 0.05em;
@@ -143,13 +146,13 @@ body {
     border-radius: 100%;
     overflow: hidden;
     font-size: 1rem;
-    color: white;
+    color: var(--primary-color);
 }
 #top > .content > .body ul li {
     display: inline-block;
     margin-right: 1rem;
     opacity: 0.6;
-    color: white;
+    color: var(--primary-color);
     transition: all 5000ms ease-in-out;
 }
 
@@ -158,7 +161,7 @@ body {
 }
 
 #top > .content > .body ul li.offline {
-    color: red;
+    color: rgb(219, 68, 68);
 }
 
 #top > .content > .body ul li.ping:hover::after {
@@ -177,7 +180,7 @@ body {
 #header .right .login-box {
     display: block;
     position: absolute;
-    background-color: white;
+    background-color: var(--primary-color);
     width: fit-content;
     padding: 1rem;
     border-radius: 0.5rem;
@@ -203,7 +206,7 @@ body {
 /* DETTE ER MIDLERTIDIG STYLING */
 
 #header > div > div.register-box.smooth-shadow form .info i, span {
-    color: black;
+    color: var(--primary-text-color);
     line-height: 1rem;  
     vertical-align: top;
 }
@@ -254,7 +257,7 @@ body {
     width: 40%;
     min-width: 500px;
     max-width: 30rem;
-    background-color: white;
+    background-color: var(--primary-color);
     animation: slide-in-sidebar 200ms ease-in-out both;
 }
 
@@ -300,7 +303,7 @@ body {
     transform: translate(calc(-100% - 1rem));
     border: none;
     outline: none;
-    color: white;
+    color: var(--primary-color);
     font-family: 'PT-sans', sans-serif;
     border-radius: 2rem;
     background: transparent;
@@ -358,7 +361,7 @@ body {
     text-transform: uppercase;
     position: relative;
     width: fit-content;
-    background-color: white;
+    background-color: var(--primary-color);
     color: var(--color-two);
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
@@ -419,7 +422,7 @@ body {
 #header .right .login-box.mobile, .register-box.mobile {
     position: fixed;
     bottom: 0;
-    background-color: white;
+    background-color: var(--primary-color);
     width: 100%;
     border-radius: 1rem 1rem 0 0;
     left: 0;
@@ -434,8 +437,9 @@ body {
     position: fixed;
     height: 100%;
     width: 100%;
-    background-color: rgba(0,0,0,0.5);
-    z-index: 1  ;
+    background-color: var(--primary-text-color);
+    opacity: 0.5;
+    z-index: 1;
     top: 0;
     left: 0;
 }
@@ -504,14 +508,14 @@ body {
 
 
 #header .right .login-box::after {
-    border: white solid;
+    border: var(--primary-color) solid;
     height: 0;
     width: 0;
     position: absolute;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
     border-top: 5px solid transparent;
-    border-bottom: 5px solid white;
+    border-bottom: 5px solid var(--primary-color);
     content:".";
     color: transparent;
     left: 4rem;
@@ -587,14 +591,14 @@ body {
     min-height: 100vh;
     margin-top: -40vh;
     overflow: auto;
-    background-image: url("/images/minecraftting8.png");
+    /*background-image: url("/images/minecraftting8.png");*/
 }
 
 #white-box {
     position: fixed;
     bottom: calc(-80% + 3rem);
     height: 80%;
-    background-color: white;
+    background-color: var(--primary-color);
     border: 2px solid #a9bcc6;
     box-sizing: border-box;
     width: 80%;
@@ -619,12 +623,12 @@ body.mobile #white-box {
     height: 3rem;
     width: 3rem;
     border-radius: 3rem;
-    background-color: white;
+    background-color: var(--primary-color);;
     position: absolute;
     left: 50%;
     z-index: 10;
     transform: translate(-50%,-50%);
-    color: black;
+    color: var(--primary-text-color);
     text-align: center;
     border: 2px solid #a9bcc6;
     transition: all 150ms ease-in-out;
@@ -687,6 +691,11 @@ body.mobile #white-box .image-display {
     z-index: 2;
     transition: all 200ms ease-in-out;
     right: calc(50% - 6rem);
+    animation: fade-in 200ms ease-in-out 0.5s both;
+}
+
+body.mobile #white-box > .fasten-white-box {
+    display: none;
 }
 
 #white-box > .fasten-white-box.content-shown {
@@ -766,7 +775,7 @@ body.mobile #white-box > .wrapper {
     text-overflow: clip;
     font-size: 1.8rem;
     height: fit-content;
-    color: white;
+    color: var(--primary-color);
     display: inline-block;
     padding-right: 1rem;
     box-sizing: border-box;
@@ -815,7 +824,7 @@ body.mobile #white-box > .wrapper > .action-buttons-wrapper > .action-button {
 }
 
 #white-box > .wrapper .connector-ribbon .top, .bottom{
-    background-color: white;
+    background-color: var(--primary-color);;
 }
 
 #white-box > .wrapper .connector-ribbon .top {
@@ -916,7 +925,7 @@ body.mobile #white-box > .wrapper > .action-buttons-wrapper > .action-button {
 .fp-modal {
     height: 80%;
     width: 80%;
-    background-color: white;
+    background-color: var(--primary-color);
     border-radius: 1rem;
     position: absolute;
     top: 50%;
@@ -943,7 +952,7 @@ body.mobile #white-box > .wrapper > .action-buttons-wrapper > .action-button {
     overflow-x: hidden;
     padding: 2rem !important;
     box-sizing: border-box;
-    color: white;
+    color: var(--primary-color);
 }
 
 .user-list .user-entry {
@@ -951,7 +960,7 @@ body.mobile #white-box > .wrapper > .action-buttons-wrapper > .action-button {
     max-width: 50rem;
     height: 3rem;
     display: block;
-    color: white;
+    color: var(--primary-color);
 }
 
 .user-list .user-entry > * {
@@ -1043,13 +1052,13 @@ body.mobile #white-box > .wrapper > .action-buttons-wrapper > .action-button {
 }
 
 .fp-modal .server-console > h1 {
-    color: white;
+    color: var(--primary-color);
     font-weight: lighter;
 
 }
 
 .fp-modal .server-console .console-body {
-    background-color: white;
+    background-color: var(--primary-color);
     height: 100%;
     width: 100%;
     border-radius: 1rem;
@@ -1138,7 +1147,7 @@ body > div.fp-modal > div.server-console > div > div.server-feedback > button:fo
     min-height: 1rem;
     transform: translate(0,-100%);
     content: "The server chat will not show up in this console output window. If any errors occur, or there is some output returned from your query, it will be shown in this field.";
-    color: white;
+    color: var(--primary-color);
     animation: fade-in 200ms ease-in-out;
     padding: 1rem;
     box-sizing: border-box;

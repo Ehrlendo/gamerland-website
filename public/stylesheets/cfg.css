@@ -9,7 +9,7 @@ body {
 }
 
 .white {
-  color: white;
+  color: var(--primary-color);
 }
 
 .fd-text-input {  /*label*/
@@ -43,7 +43,7 @@ body {
     width: 100%;
     transform: translate(-50%, -50%);
     position: absolute;
-    background: white;
+    background: var(--primary-color);
     /*
     MAYBE GRADIENT RIPPLE EFFECT?
     background: rgb(131,58,180);
@@ -139,7 +139,7 @@ body {
     line-height: 1rem;
     height: 1rem;
     top: 50%;
-    background-color: white;
+    background-color: var(--primary-color);
   }
   
   .fd-text-input .fd-text-input__title  {
@@ -209,11 +209,11 @@ body {
   font-weight: bold;
   border-radius: 0.25rem;
   transition: all 150ms ease-in-out;
-  color: white;
+  color: var(--primary-color);
 }
 
 .button.fd-design * {
-  color: white;
+  color: var(--primary-color);
 }
 
 .button.fd-design:disabled {
@@ -234,7 +234,7 @@ body {
 }
 
 .button.outline {
-  border: 2px solid white;
+  border: 2px solid var(--primary-color);
   border-radius: 0.25rem;
   background-color: transparent;
   color: white;
@@ -243,7 +243,7 @@ body {
 }
 
 .button.white {
-  background-color: white;
+  background-color: var(--primary-color);
   color: var(--color-two);
 }
 
@@ -262,6 +262,8 @@ body {
 
 
 :root {
+  --primary-color: white;
+  --primary-text-color: black;
   --color-one: #8d8741;
   --color-two: #659DBD;
   --color-three: #DAAD86;
@@ -269,3 +271,14 @@ body {
   --color-five: #FBEEC1;
 }
 
+/*
+:root {
+  --primary-color: #383734;
+  --primary-text-color: black;
+  --color-one: #8d8741;
+  --color-two: #000001;
+  --color-three: #DAAD86;
+  --color-four: #22211f;
+  --color-five: #FBEEC1;
+}
+*/

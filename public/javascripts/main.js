@@ -190,7 +190,7 @@ function sleep(interval) {
 
 
 window.onload = function() {
-    countdownInit();
+    //countdownInit();
     //var modal = document.body.querySelector(".login-box");
     //modal.style.display = "none";
 
@@ -805,6 +805,12 @@ function adminModal() {
             if(this.status == 200 && this.readyState == 4) {
                 //OK
                 e.target.innerHTML = "Submitted";
+
+
+                //Fix user roles in discord
+                var secret = localStorage.getItem("pass");
+                giveAcceptedUsersRoles(acceptedList, secret);
+
                 setTimeout(()=>{
                     if(e.target instanceof HTMLElement) {
                         e.target.innerHTML = "Submit";
@@ -845,6 +851,28 @@ function adminModal() {
         }
     }
 
+}
+
+function giveAcceptedUsersRoles(users, secret) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://localhost:4000/users/roles/add");
+    xhr.setRequestHeader("Content-Type", "multipart/form-data");
+    if(secret.trim().length == 0 || users.length == 0) return;
+
+    var formData = new FormData();
+    formData.append("users", JSON.stringify(users))
+    formData.append("secret", secret);
+
+    xhr.send(formData);
+    xhr.onreadystatechange = function() {
+        if(this.readyState == 4 && this.status == 200) {
+            //OK
+
+        }  else if(this.readyState == 4 && this.status != 200) {
+            //NOT OK
+
+        }
+    }
 }
 
 
@@ -1093,7 +1121,7 @@ function toggleFastenButton(el) {
     }
 }
 
-
+/*
 //COUNTDOWN TIMER CODE
 function countdownInit() {
     //Check if the countdown is finished or not
@@ -1191,4 +1219,4 @@ function animateTitle(el) {
             el.style.animation = "animateLaunchTitle 1300ms cubic-bezier(0.07, 0.19, 0.15, 1.47) 100ms";
         }, 300);
     }
-}
+}*/
