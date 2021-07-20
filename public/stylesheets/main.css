@@ -59,7 +59,7 @@ body {
     position: relative;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url('/images/backgroundLightTheme.png')
+    background-image: url('/images/backgroundLightTheme.png');
 }
 
 #top .title {
@@ -211,6 +211,11 @@ body {
     vertical-align: top;
 }
 
+#header > div > div.register-box.smooth-shadow form .info i {
+    display: block;
+    margin-bottom: 1rem;
+}
+
 #header > div > div.register-box.smooth-shadow form .info span {
     margin-left: 0.5rem;
 }
@@ -218,6 +223,8 @@ body {
 #header > div > div.register-box.smooth-shadow form .info {
     margin: auto;
     width: fit-content;
+    max-width: 80%;
+    text-align: center;
     margin-top: 1rem;
 }
 
@@ -998,6 +1005,10 @@ body.mobile #white-box > .wrapper > .action-buttons-wrapper > .action-button {
     min-width: 10rem;
     overflow: hidden;
     height: 2rem;
+}
+
+.user-list .user-entry .buttons-wrapper button:first-of-type i{
+    color: var(--color-two) !important;
 }
 
 .user-list .user-entry .buttons-wrapper button:hover {

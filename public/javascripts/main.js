@@ -856,7 +856,7 @@ function adminModal() {
 function giveAcceptedUsersRoles(users, secret) {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "http://localhost:4000/users/roles/add");
-    xhr.setRequestHeader("Content-Type", "multipart/form-data");
+    //xhr.setRequestHeader("Content-Type", "multipart/form-data");
     if(secret.trim().length == 0 || users.length == 0) return;
 
     var formData = new FormData();

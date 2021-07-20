@@ -92,7 +92,11 @@ setTimeout(()=>{
   console.log(io);
 }, 1000)
 client.on('output', (message) => {
+  console.log("THIS IS THE MESSAGE: " + message);
   io.emit("minecraft-server-console", message);
+  if(whiteListResolve) {
+    whiteListResolve();
+  }
   client.close();
 })
 
@@ -126,6 +130,8 @@ router.post("/consoleCommand", async function(req, res) {
   })
 })
 
+var whiteListResolve;
+var whiteListReject;
 
 router.post("/updateUserList", async function(req, res) {
   if(!req.session.adminAuthed) {res.status(503).send({message:"not authorized!"})}
@@ -133,11 +139,19 @@ router.post("/updateUserList", async function(req, res) {
   var acceptedList = req.body.accepted.trim().length!=0 ? JSON.parse(req.body.accepted) : undefined;
   var rejectedList = req.body.rejected.trim().length!=0 ? JSON.parse(req.body.rejected) : undefined;
   function runServerCommand(usrname) {
+    return new Promise((resolve,reject) => {
+      whiteListResolve = resolve;
+      whiteListReject = reject;
       client.connect()
-      .then(()=>{client.run('whitelist add ' + usrname)})
+      .then(()=>{
+        client.run('whitelist add ' + usrname)
+        .then(resolve())
+      })
       .catch((error)=>{
         console.error(error);
+        reject(error);
       })
+    })
   }
   
   
@@ -146,7 +160,12 @@ router.post("/updateUserList", async function(req, res) {
     if(acceptedList) {
       for(x of acceptedList) {
         await sendAccepted(x);
-        await runServerCommand(x.usrname);
+        setTimeout(async ()=>{
+          await runServerCommand(x.usrname); 
+          console.log(x.usrname);
+          whiteListResolve;
+          whiteListReject;
+        }, 100)
       }  
     }
 
