@@ -228,7 +228,6 @@ window.onload = function() {
     window.addEventListener("keydown", (e) => {
         if(e.key == "Delete") {
             //Open up the accept modal
-            alert("unban meeeeg Erleeeeend")
             adminModal();
         }
     });
