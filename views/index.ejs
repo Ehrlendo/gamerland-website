@@ -73,10 +73,10 @@
                         </label>
 
                         
-                        <button class="fd-design button blue smooth-shadow" onclick="registerUser(event)">Send inn</button>
+                        <button class="fd-design button blue smooth-shadow" onclick="registerUser(event)" disabled>Send inn</button>
                         
                         <div class="info">
-                            <i class="material-icons-outlined">info</i><span>Når forespørselen blir godkjent, vil du få beskjed i <b>verifisering</b>-kanalen på discord. Husk å sjekke denne jevnlig.</b></span>
+                            <i class="material-icons-outlined">info</i><span>Når forespørselen blir godkjent, vil du få beskjed i <b>verifisering</b>-kanalen på discord. Husk å sjekke denne jevnlig.</b> <br><br> <strong>Merk - denne funksjonen er slått av</strong></span>
                         </div>
                     </form>
                 </div>
@@ -128,7 +128,33 @@
             </div>
         </div>  
     </div>
-    <script src="/socket.io/socket.io.js"></script>
+    <div id="acknowledge-modal">
+        <div class="pane">
+            <div class="wrapper">
+                <div class="text">
+                    <p class="draft">Utkast 1</p>
+                    <h1>Hei! Det er noe du burde vite.</h1>
+                    <p><strong>Gamerland 5 har nylig byttet hostingplatform.</strong> For deg som allerede spiller på serveren er nok livet det samme gamle, og du kan se bort ifra denne meldingen.</p>
+                    <p>Om du er på denne nettsiden for å søke om å komme inn, er du dessverre på feil sted. Denne funksjonaliteten vil være slått av per <strong style="text-decoration: underline;">21.08.2021</strong>.</p>
+                    <p>Om du ønsker å være med i discord-serveren, anbefales det at du kontakter en kamerat som allerede er med, eller en av følgende server-administratorer:</p>
+                    <ul>
+                        <li>Erland#6320</li>
+                        <li>Shiro-Hiragi#3792</li>
+                        <li>Nousy_#2991</li>
+                        <li>Sigg#1129</li>
+                    </ul>
+                    
+                    <p style="margin-top: 2rem;">Etter at du trykker på <button class="fd-design button white smooth-shadow" style="margin: 0 1rem; transform: none !important;">lukk</button> nedenfor i denne boksen, vil den ikke vises igjen.</p>
+                    <p>Alternativt kan du trykke på <button class="fd-design button outline" style="margin: 0 1rem; transform: none !important;">vis neste gang</button> for å vise denne boksen neste gang du besøker nettsiden.</p>
+                </div>
+                
+                <button onclick="closeConsentModal()" class="fd-design button smooth-shadow white close">Lukk</button>
+                <button onclick="delayConsentModal()" class="fd-design button outline delay">Vis neste gang</button>
+            </div>
+        </div>
 
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    
 </body>
 </html>

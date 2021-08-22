@@ -232,11 +232,32 @@ window.onload = function() {
         }
     });
 
+//Check if the user has visited the website recently
+var lSt = JSON.parse(localStorage.getItem("godtatt-endring"));
 
+if(!lSt) {
+    //Create the acknowledge modal
+    var modal = document.getElementById("acknowledge-modal");
+    modal.style.display = "block";
+}
 
 
 }
 
+function closeConsentModal() {
+    localStorage.setItem("godtatt-endring", JSON.stringify(true));
+    var modal = document.getElementById("acknowledge-modal");
+    if(modal) {
+        modal.parentNode.removeChild(modal);
+    }
+}
+
+function delayConsentModal() {
+    var modal = document.getElementById("acknowledge-modal");
+    if(modal) {
+        modal.parentNode.removeChild(modal);
+    }
+}
 
 
 var isPushEnabled = false;
