@@ -307,7 +307,7 @@ body.mobile #header > div > div.register-box.smooth-shadow form .info /*.disable
     margin-bottom: 2rem;
 }
 
-body.mobile #header .right button {
+body.mobile #header .right > button {
     display: none;
 }
 
