@@ -64,12 +64,12 @@ body {
 #top > .main-background-image {
     background-repeat: no-repeat;
     background-size: cover;
-    /*background-image: url('/images/backgroundLightTheme.png');*/
+    background-image: url('/images/backgroundLightTheme.png');
     position: absolute;
     top: 0;
     left: 0;
     height: 100vh;
-    width: auto;
+    width: 100%;
 }
 
 #top .title {

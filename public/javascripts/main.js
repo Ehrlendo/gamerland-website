@@ -251,7 +251,7 @@ if(!lSt) {
         console.log(blur)
         console.log(mainImage)
         
-        mainImage.src = "/images/backgroundLightTheme.png";
+        //mainImage.src = "/images/backgroundLightTheme.png";
 
         await new Promise((resolve) => {mainImage.onload = resolve();})
         //Main image is loaded
