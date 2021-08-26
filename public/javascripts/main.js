@@ -242,6 +242,25 @@ if(!lSt) {
 }
 
 
+    //Add the image blur event listener
+
+    (async ()=>{
+        
+        var mainImage = document.getElementById("top").querySelector(".main-background-image");
+        var blur = document.getElementsByClassName("blurred-preview")[0];
+        console.log(blur)
+        console.log(mainImage)
+        
+        await new Promise((resolve) => {mainImage.onload = resolve();})
+        //Main image is loaded
+        var blur = document.getElementsByClassName("blurred-preview")[0];
+        if(!(blur instanceof HTMLElement)) return;
+        
+        blur.style.animation = "fade-out 300ms ease-in-out both";
+        
+    })();
+
+
 }
 
 function closeConsentModal() {
