@@ -271,6 +271,7 @@ if(!lSt) {
             
             setTimeout(()=>{
                 blur.style.animation = "fade-out 300ms ease-in-out both";
+                mainImage.style.display = "block";
                 setTimeout(()=>{
                     blur.parentNode.removeChild(blur);
                     loader.parentNode.removeChild(loader);

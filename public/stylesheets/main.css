@@ -69,6 +69,8 @@ body {
     top: 0;
     left: 0;
     height: 100vh;
+    display: none;
+    animation: fade-in 100ms ease-in-out both;
 }
 
 #top .title {
@@ -235,6 +237,10 @@ body {
     max-width: 80%;
     text-align: center;
     margin-top: 1rem;
+}
+
+body.mobile #header > div > div.register-box.smooth-shadow form .info /*.disabled*/ {
+    display: none;
 }
 
 
