@@ -1216,6 +1216,12 @@ body > div.fp-modal > div.server-console > div > div.server-feedback > button:fo
 
 }
 
+body.mobile #acknowledge-modal .pane {
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+}
+
 #acknowledge-modal .pane .wrapper {
     position: relative;
     width: 100%;
