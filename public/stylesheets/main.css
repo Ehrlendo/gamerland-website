@@ -1245,3 +1245,14 @@ body > div.fp-modal > div.server-console > div > div.server-feedback > button:fo
     margin: auto;
     width: 100%;
 }
+
+kbd.small {
+    padding: 0.1rem 0.2rem;
+    height: fit-content;
+    width: fit-content;
+    margin: 0 0.2rem;
+    border-radius: 0.2rem;
+    background-color: white;
+    color: var(--color-two);
+    overflow: hidden;
+}
