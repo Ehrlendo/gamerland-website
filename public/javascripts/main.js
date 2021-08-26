@@ -251,12 +251,16 @@ if(!lSt) {
         console.log(blur)
         console.log(mainImage)
         
+        mainImage.src = "/images/backgroundLightTheme.png";
+
         await new Promise((resolve) => {mainImage.onload = resolve();})
         //Main image is loaded
         var blur = document.getElementsByClassName("blurred-preview")[0];
         if(!(blur instanceof HTMLElement)) return;
         
-        blur.style.animation = "fade-out 300ms ease-in-out both";
+        setTimeout(()=>{
+            blur.style.animation = "fade-out 300ms ease-in-out both";
+        }, 100)
         
     })();
 
