@@ -55,7 +55,7 @@ router.get('/', function(req, res, next) {
   if(ua.isFirefox) {
     res.render('index', {warning: 'Denne nettleseren er ikke støttet. Prøv Google Chrome.'})
   } else if(ua.isMobile) {
-    res.render('index', {warning: 'Mobilversjonen mangler funksjonalitet'})
+    res.render('index', {warning: ''})
   }
   res.render('index', {warning: ''});
 });

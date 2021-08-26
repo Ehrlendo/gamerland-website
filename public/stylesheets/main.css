@@ -672,7 +672,7 @@ body.mobile #white-box {
     opacity: 1;
 }
 #white-box:hover > .arrow-indicator, #white-box.show > .arrow-indicator {
-    border: 3px solid var(--color-two);
+    border: 3px solid #A4BDD0;
     content: "ned";
     box-shadow: none !important;
 }
