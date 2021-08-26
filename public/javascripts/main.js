@@ -245,9 +245,20 @@ if(!lSt) {
     //Add the image blur event listener
 
     (async ()=>{
-        
-        var mainImage = document.getElementById("top").querySelector(".main-background-image");
         var blur = document.getElementsByClassName("blurred-preview")[0];
+        
+        //Show that the image is loading
+        var loader = document.createElement("div");
+        loader.style.display = "none";
+        loader.className = "image-loading-wrapper";
+        loader.innerText="Laster inn bildet";
+        document.body.appendChild(loader);
+        setTimeout(()=>{
+            if(!(loader instanceof HTMLElement)) return;
+            loader.style.display = "flex";
+        }, 1000)
+
+        var mainImage = document.getElementById("top").querySelector(".main-background-image");
         console.log(blur)
         console.log(mainImage)
         
@@ -260,6 +271,10 @@ if(!lSt) {
             
             setTimeout(()=>{
                 blur.style.animation = "fade-out 300ms ease-in-out both";
+                setTimeout(()=>{
+                    blur.parentNode.removeChild(blur);
+                    loader.parentNode.removeChild(loader);
+                }, 500)
             }, 100)
         }
 
